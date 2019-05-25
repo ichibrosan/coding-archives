@@ -1,0 +1,62 @@
+From: Douglas Goodall <douglas@goodallsolutions.com>
+Date: October 12, 2006 7:37:00 PM PDT
+To: douglas_goodall@mac.com
+Subject: FW: Creator Code Registration Confirmation
+
+
+
+From: Apple Developer Support <cfreg@apple.com>
+Reply-To: Apple Developer Support <cfreg@apple.com>
+To: douglas_goodall@mac.com, douglas_goodall@mac.com
+CC: Apple Developer Support <cfreg@apple.com>
+Subject: Creator Code Registration Confirmation
+Date: Wed, 16 Aug 2006 13:16:47 -0700 (PDT)
+
+Dear Douglas,
+
+
+Thank you for registering your creator code information with Apple Computer.
+
+We appreciate your continued product development and support. The following
+
+product information has been registered:
+
+Company:  Goodall Solutions
+
+First Name:  Douglas
+
+Last Name:  Goodall
+
+Address:  425 San Juanico St
+
+City:  Santa Maria
+
+State:  CA
+
+Postal/Zip Code:  93455
+
+Country:  United States
+
+
+Phone Number:  1-805-9282445
+
+Email Address:  douglas_goodall@mac.com
+
+Application:  X Virtual Protocol Adapter
+
+
+Application Signatures:
+ASCII: XVPA  HEX: 58565041
+
+
+This email serves as your registration confirmation. If you require any
+
+changes to this information, please contact Apple Developer Support at
+
+cfreg@apple.com with any requested changes.
+
+
+Again, thank you for supporting Apple Computer.
+
+
+

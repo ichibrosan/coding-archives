@@ -1,0 +1,16 @@
+; dougdos.equ
+LOADSIZE	equ	100h
+BIOSSIZE	equ	300h
+DOSSIZE		equ	0FFFFH-BIOSSIZE-LOADSIZE
+TPA		equ	0800h
+
+;
+DOSVER		equ	0
+RUNXEQ		equ	1
+MSGOUT		equ	2
+
+
+;	org	LOADSIZE+BIOSSIZE+4
+;dos_func:
+
+; eof - dougdos.equ

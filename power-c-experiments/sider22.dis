@@ -1,0 +1,3247 @@
+
+0000: C3        db  $C3
+
+0001: EF        db  $EF
+0002: F0 F9     beq $FFFFFFFD	; Branch Equals, relative
+
+
+0004: F2        db  $F2
+0005: E9 E7     sbc #$E7	; SuBtract with borrow, immediate
+0007: E8        inx 		; INcrement X by one, implied
+
+0008: F4        db  $F4
+0009: A0 B1     ldy #$B1	; LoaD Y from memory, immediate
+000B: B9 00 B7  lda $B700,x	; LoaD A from memory, absolute indexed
+000E: A0 E6     ldy #$E6	; LoaD Y from memory, immediate
+
+0010: EF        db  $EF
+
+0011: F2        db  $F2
+0012: A0 C1     ldy #$C1	; LoaD Y from memory, immediate
+0014: E4 F6     cpx $F6		; ComPare X with memory, zeropage
+0016: E1 EE     sbc ($00EE),x	; SuBtract with borrow, indirect indexed
+
+0018: E3        db  $E3
+0019: E5 E4     sbc $E4		; SuBtract with borrow, zeropage
+001B: A0 D4     ldy #$D4	; LoaD Y from memory, immediate
+001D: E5 E3     sbc $E3		; SuBtract with borrow, zeropage
+001F: E8        inx 		; INcrement X by one, implied
+0020: A0 D3     ldy #$D3	; LoaD Y from memory, immediate
+0022: E5 F2     sbc $F2		; SuBtract with borrow, zeropage
+0024: F6 E9     inc $E9,x	; INCrement memory by one, zeropage indexed
+
+0026: E3        db  $E3
+0027: E5 F3     sbc $F3		; SuBtract with borrow, zeropage
+0029: 8D 00 F2  sta $F200	; STore A into memory, absolute
+002C: E9 F4     sbc #$F4	; SuBtract with borrow, immediate
+
+002E: F4        db  $F4
+002F: E5 EE     sbc $EE		; SuBtract with borrow, zeropage
+0031: A0 E2     ldy #$E2	; LoaD Y from memory, immediate
+0033: F9 00 CC  sbc $CC00,y	; SuBtract with borrow, absolute indexed
+0036: E1 F2     sbc ($00F2),x	; SuBtract with borrow, indirect indexed
+
+0038: F2        db  $F2
+0039: F9 00 C5  sbc $C500,y	; SuBtract with borrow, absolute indexed
+003C: AE 00 D2  ldx $D200	; LoaD X from memory, absolute
+
+003F: EF        db  $EF
+0040: E4 E4     cpx $E4		; ComPare X with memory, zeropage
+0042: E5 EE     sbc $EE		; SuBtract with borrow, zeropage
+
+0044: E2        db  $E2
+0045: E5 F2     sbc $F2		; SuBtract with borrow, zeropage
+
+0047: F2        db  $F2
+0048: F9 00 A0  sbc $A000,y	; SuBtract with borrow, absolute indexed
+004B: A0 D6     ldy #$D6	; LoaD Y from memory, immediate
+004D: E5 F2     sbc $F2		; SuBtract with borrow, zeropage
+
+004F: F3        db  $F3
+0050: E9 EF     sbc #$EF	; SuBtract with borrow, immediate
+0052: EE 00 B2  inc $B200	; INCrement memory by one, absolute
+0055: AE 00 B2  ldx $B200	; LoaD X from memory, absolute
+0058: A0 A0     ldy #$A0	; LoaD Y from memory, immediate
+
+005A: B2        db  $B2
+
+005B: AF        db  $AF
+005C: B1 B6     lda ($00B6),y	; LoaD A from memory, indirect indexed
+
+005E: AF        db  $AF
+005F: B8        clv 		; CLear oVerflow flag, implied
+
+0060: B7        db  $B7
+0061: 8D 00 00  sta $0000	; STore A into memory, absolute
+0064: D0 42     bne $00A8	; Branch Not Equals, relative
+
+0066: A9 02     lda #$02	; LoaD A from memory, immediate
+0068: 85 46     sta $46		; STore A into memory, zeropage
+006A: 84 47     sty $47		; STore Y into memory, zeropage
+006C: A0 08     ldy #$08	; LoaD Y from memory, immediate
+006E: 20 00 C8  jsr $C800	; Jump to SubRoutine, absolute
+
+0071: B0 30     bcs $00A3	; Branch Carry Set, relative
+
+0073: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0076: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0079: C8        iny 		; INcrement Y by one, implied
+007A: C0 29     cpy #$29	; ComPare Y with memory, immediate
+007C: D0 F5     bne $0073	; Branch Not Equals, relative
+
+007E: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0081: 85 3A     sta $3A		; STore A into memory, zeropage
+0083: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0086: C8        iny 		; INcrement Y by one, implied
+0087: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+008A: 85 3B     sta $3B		; STore A into memory, zeropage
+008C: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+008F: C8        iny 		; INcrement Y by one, implied
+0090: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0093: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0096: C8        iny 		; INcrement Y by one, implied
+0097: D0 F7     bne $0090	; Branch Not Equals, relative
+
+0099: 20 00 C9  jsr $C900	; Jump to SubRoutine, absolute
+
+009C: B0 05     bcs $00A3	; Branch Carry Set, relative
+
+009E: A6 3A     ldx $3A		; LoaD X from memory, zeropage
+00A0: A4 3B     ldy $3B		; LoaD Y from memory, zeropage
+00A2: 60        rts 		; ReTurn from Subroutine, implied
+
+00A3: A2 00     ldx #$00	; LoaD X from memory, immediate
+00A5: A0 00     ldy #$00	; LoaD Y from memory, immediate
+00A7: 60        rts 		; ReTurn from Subroutine, implied
+
+00A8: A5 44     lda $44		; LoaD A from memory, zeropage
+00AA: 85 3A     sta $3A		; STore A into memory, zeropage
+00AC: A5 45     lda $45		; LoaD A from memory, zeropage
+00AE: 85 3B     sta $3B		; STore A into memory, zeropage
+00B0: E6 3B     inc $3B		; INCrement memory by one, zeropage
+00B2: C0 02     cpy #$02	; ComPare Y with memory, immediate
+00B4: F0 18     beq $00CE	; Branch Equals, relative
+
+00B6: A0 08     ldy #$08	; LoaD Y from memory, immediate
+00B8: 20 00 C8  jsr $C800	; Jump to SubRoutine, absolute
+
+00BB: B0 10     bcs $00CD	; Branch Carry Set, relative
+
+00BD: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+00C0: 91 44     sta ($0044),y	; STore A into memory, indirect indexed
+00C2: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+00C5: 91 3A     sta ($003A),y	; STore A into memory, indirect indexed
+00C7: C8        iny 		; INcrement Y by one, implied
+00C8: D0 F3     bne $00BD	; Branch Not Equals, relative
+
+00CA: 4C 00 C9  jmp $C900	; JuMP to new location, absolute
+
+00CD: 60        rts 		; ReTurn from Subroutine, implied
+
+00CE: A0 0A     ldy #$0A	; LoaD Y from memory, immediate
+00D0: 20 00 C8  jsr $C800	; Jump to SubRoutine, absolute
+
+00D3: B0 10     bcs $00E5	; Branch Carry Set, relative
+
+00D5: B1 44     lda ($0044),y	; LoaD A from memory, indirect indexed
+00D7: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+00DA: B1 3A     lda ($003A),y	; LoaD A from memory, indirect indexed
+00DC: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+00DF: C8        iny 		; INcrement Y by one, implied
+00E0: D0 F3     bne $00D5	; Branch Not Equals, relative
+
+00E2: 4C 00 C9  jmp $C900	; JuMP to new location, absolute
+
+00E5: 60        rts 		; ReTurn from Subroutine, implied
+
+00E6: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+00E9: 29 F8     and #$F8	; memory with A, immediate
+00EB: C9 20     cmp #$20	; CoMP A with memory, immediate
+00ED: F0 0A     beq $00F9	; Branch Equals, relative
+
+00EF: A9 20     lda #$20	; LoaD A from memory, immediate
+00F1: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+00F4: A9 00     lda #$00	; LoaD A from memory, immediate
+00F6: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+00F9: A9 01     lda #$01	; LoaD A from memory, immediate
+00FB: 24 43     bit $43		; test BITs in memory with A, zeropage
+00FD: 10 01     bpl $0100	; Branch PLus, relative
+
+00FF: 0A        asl a		; Arithmetic Shift Left one bit, accumulator
+0100: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+0103: A9 80     lda #$80	; LoaD A from memory, immediate
+0105: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+0108: A9 00     lda #$00	; LoaD A from memory, immediate
+010A: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+010D: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0110: 29 08     and #$08	; memory with A, immediate
+0112: F0 43     beq $0157	; Branch Equals, relative
+
+0114: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0117: 10 FB     bpl $0114	; Branch PLus, relative
+
+0119: 98        tya 		; Transfer Y to A, implied
+011A: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+011D: A9 00     lda #$00	; LoaD A from memory, immediate
+011F: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+0122: A5 47     lda $47		; LoaD A from memory, zeropage
+0124: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+0127: A5 46     lda $46		; LoaD A from memory, zeropage
+0129: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+012C: A9 01     lda #$01	; LoaD A from memory, immediate
+012E: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+0131: A9 47     lda #$47	; LoaD A from memory, immediate
+0133: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+0136: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0139: 10 FB     bpl $0136	; Branch PLus, relative
+
+013B: 29 40     and #$40	; memory with A, immediate
+013D: F0 15     beq $0154	; Branch Equals, relative
+
+013F: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0142: A8        tay 		; Trabsfer A to Y, implied
+0143: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0146: 10 FB     bpl $0143	; Branch PLus, relative
+
+0148: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+014B: 98        tya 		; Transfer Y to A, implied
+014C: 29 02     and #$02	; memory with A, immediate
+014E: F0 04     beq $0154	; Branch Equals, relative
+
+0150: A9 27     lda #$27	; LoaD A from memory, immediate
+0152: 38        sec 		; SEt Carry flag, implied
+0153: 60        rts 		; ReTurn from Subroutine, implied
+
+0154: A8        tay 		; Trabsfer A to Y, implied
+0155: 18        clc 		; CLear Carry flag, implied
+0156: 60        rts 		; ReTurn from Subroutine, implied
+
+0157: A9 2F     lda #$2F	; LoaD A from memory, immediate
+0159: 38        sec 		; SEt Carry flag, implied
+015A: 60        rts 		; ReTurn from Subroutine, implied
+
+015B: 29 07     and #$07	; memory with A, immediate
+015D: 0A        asl a		; Arithmetic Shift Left one bit, accumulator
+015E: 0A        asl a		; Arithmetic Shift Left one bit, accumulator
+015F: 0A        asl a		; Arithmetic Shift Left one bit, accumulator
+0160: 0A        asl a		; Arithmetic Shift Left one bit, accumulator
+0161: 85 43     sta $43		; STore A into memory, zeropage
+0163: A9 01     lda #$01	; LoaD A from memory, immediate
+0165: 85 42     sta $42		; STore A into memory, zeropage
+0167: A9 08     lda #$08	; LoaD A from memory, immediate
+0169: 85 45     sta $45		; STore A into memory, zeropage
+016B: A9 00     lda #$00	; LoaD A from memory, immediate
+016D: 85 44     sta $44		; STore A into memory, zeropage
+016F: 85 46     sta $46		; STore A into memory, zeropage
+0171: 85 47     sta $47		; STore A into memory, zeropage
+0173: A6 43     ldx $43		; LoaD X from memory, zeropage
+0175: A4 42     ldy $42		; LoaD Y from memory, zeropage
+0177: 20 00 C8  jsr $C800	; Jump to SubRoutine, absolute
+
+017A: 90 06     bcc $0182	; Branch Carry Clear, relative
+
+017C: C9 2F     cmp #$2F	; CoMP A with memory, immediate
+017E: F0 12     beq $0192	; Branch Equals, relative
+
+0180: D0 F1     bne $0173	; Branch Not Equals, relative
+
+0182: AE 00 08  ldx $0800	; LoaD X from memory, absolute
+0185: CA        dex 		; DEcrement X by one, implied
+0186: D0 0A     bne $0192	; Branch Not Equals, relative
+
+0188: AD 00 08  lda $0800	; LoaD A from memory, absolute
+018B: F0 05     beq $0192	; Branch Equals, relative
+
+018D: A6 43     ldx $43		; LoaD X from memory, zeropage
+018F: 4C 00 08  jmp $0800	; JuMP to new location, absolute
+
+0192: A5 00     lda $00		; LoaD A from memory, zeropage
+0194: D0 0A     bne $01A0	; Branch Not Equals, relative
+
+0196: A5 01     lda $01		; LoaD A from memory, zeropage
+0198: CD 00 07  cmp $0700	; CoMP A with memory, absolute
+019B: D0 03     bne $01A0	; Branch Not Equals, relative
+
+019D: 4C 00 FA  jmp $FA00	; JuMP to new location, absolute
+
+01A0: 20 00 FE  jsr $FE00	; Jump to SubRoutine, absolute
+
+01A3: 20 00 FE  jsr $FE00	; Jump to SubRoutine, absolute
+
+01A6: 20 00 FB  jsr $FB00	; Jump to SubRoutine, absolute
+
+01A9: 20 00 FC  jsr $FC00	; Jump to SubRoutine, absolute
+
+01AC: A0 16     ldy #$16	; LoaD Y from memory, immediate
+01AE: B9 00 C9  lda $C900,x	; LoaD A from memory, absolute indexed
+01B1: 99 00 06  sta $0600,y	; STore A into memory, absolute indexed
+01B4: B9 00 C8  lda $C800,x	; LoaD A from memory, absolute indexed
+01B7: 99 00 07  sta $0700,y	; STore A into memory, absolute indexed
+01BA: 88        dey 		; DEcrement Y by one, implied
+01BB: 10 F1     bpl $01AE	; Branch PLus, relative
+
+01BD: 4C 00 E0  jmp BASIC	; JuMP to new location, absolute
+
+01C0: A0 A0     ldy #$A0	; LoaD Y from memory, immediate
+01C2: C8        iny 		; INcrement Y by one, implied
+01C3: E1 F2     sbc ($00F2),x	; SuBtract with borrow, indirect indexed
+01C5: E4 A0     cpx $A0		; ComPare X with memory, zeropage
+01C7: E4 E9     cpx $E9		; ComPare X with memory, zeropage
+
+01C9: F3        db  $F3
+
+01CA: EB        db  $EB
+01CB: A0 E9     ldy #$E9	; LoaD Y from memory, immediate
+
+01CD: F3        db  $F3
+01CE: A0 EF     ldy #$EF	; LoaD Y from memory, immediate
+01D0: E6 E6     inc $E6		; INCrement memory by one, zeropage
+01D2: EC 00 EE  cpx $EE00	; ComPare X with memory, absolute
+01D5: E5 AE     sbc $AE		; SuBtract with borrow, zeropage
+
+01D7: FF        db  $FF
+
+01D8: FF        db  $FF
+
+01D9: FF        db  $FF
+
+01DA: FF        db  $FF
+
+01DB: FF        db  $FF
+
+01DC: FF        db  $FF
+
+01DD: FF        db  $FF
+
+01DE: FF        db  $FF
+
+01DF: FF        db  $FF
+
+01E0: FF        db  $FF
+
+01E1: FF        db  $FF
+
+01E2: FF        db  $FF
+
+01E3: FF        db  $FF
+
+01E4: FF        db  $FF
+
+01E5: FF        db  $FF
+
+01E6: FF        db  $FF
+
+01E7: FF        db  $FF
+
+01E8: FF        db  $FF
+
+01E9: FF        db  $FF
+
+01EA: FF        db  $FF
+
+01EB: FF        db  $FF
+
+01EC: FF        db  $FF
+
+01ED: FF        db  $FF
+
+01EE: FF        db  $FF
+
+01EF: FF        db  $FF
+
+01F0: FF        db  $FF
+
+01F1: FF        db  $FF
+
+01F2: FF        db  $FF
+
+01F3: FF        db  $FF
+
+01F4: FF        db  $FF
+
+01F5: FF        db  $FF
+
+01F6: FF        db  $FF
+
+01F7: FF        db  $FF
+
+01F8: FF        db  $FF
+
+01F9: FF        db  $FF
+
+01FA: FF        db  $FF
+
+01FB: FF        db  $FF
+
+01FC: FF        db  $FF
+
+01FD: FF        db  $FF
+
+01FE: FF        db  $FF
+
+01FF: FF        db  $FF
+
+0200: FF        db  $FF
+
+0201: FF        db  $FF
+
+0202: FF        db  $FF
+
+0203: FF        db  $FF
+
+0204: FF        db  $FF
+
+0205: FF        db  $FF
+
+0206: FF        db  $FF
+
+0207: FF        db  $FF
+
+0208: FF        db  $FF
+
+0209: FF        db  $FF
+
+020A: FF        db  $FF
+
+020B: FF        db  $FF
+
+020C: FF        db  $FF
+
+020D: FF        db  $FF
+
+020E: FF        db  $FF
+
+020F: FF        db  $FF
+
+0210: FF        db  $FF
+
+0211: FF        db  $FF
+
+0212: FF        db  $FF
+
+0213: FF        db  $FF
+
+0214: FF        db  $FF
+
+0215: FF        db  $FF
+
+0216: FF        db  $FF
+
+0217: FF        db  $FF
+
+0218: FF        db  $FF
+
+0219: FF        db  $FF
+
+021A: FF        db  $FF
+
+021B: FF        db  $FF
+
+021C: FF        db  $FF
+
+021D: FF        db  $FF
+
+021E: FF        db  $FF
+
+021F: FF        db  $FF
+
+0220: FF        db  $FF
+
+0221: FF        db  $FF
+
+0222: FF        db  $FF
+
+0223: FF        db  $FF
+
+0224: FF        db  $FF
+
+0225: FF        db  $FF
+
+0226: FF        db  $FF
+
+0227: FF        db  $FF
+
+0228: FF        db  $FF
+
+0229: FF        db  $FF
+
+022A: FF        db  $FF
+
+022B: FF        db  $FF
+
+022C: FF        db  $FF
+
+022D: FF        db  $FF
+
+022E: FF        db  $FF
+
+022F: FF        db  $FF
+
+0230: FF        db  $FF
+
+0231: FF        db  $FF
+
+0232: FF        db  $FF
+
+0233: FF        db  $FF
+
+0234: FF        db  $FF
+
+0235: FF        db  $FF
+
+0236: FF        db  $FF
+
+0237: FF        db  $FF
+
+0238: FF        db  $FF
+
+0239: FF        db  $FF
+
+023A: FF        db  $FF
+
+023B: FF        db  $FF
+
+023C: FF        db  $FF
+
+023D: FF        db  $FF
+
+023E: FF        db  $FF
+
+023F: FF        db  $FF
+
+0240: FF        db  $FF
+
+0241: FF        db  $FF
+
+0242: FF        db  $FF
+
+0243: FF        db  $FF
+
+0244: FF        db  $FF
+
+0245: FF        db  $FF
+
+0246: FF        db  $FF
+
+0247: FF        db  $FF
+
+0248: FF        db  $FF
+
+0249: FF        db  $FF
+
+024A: FF        db  $FF
+
+024B: FF        db  $FF
+
+024C: FF        db  $FF
+
+024D: FF        db  $FF
+
+024E: FF        db  $FF
+
+024F: FF        db  $FF
+
+0250: FF        db  $FF
+
+0251: FF        db  $FF
+
+0252: FF        db  $FF
+
+0253: FF        db  $FF
+
+0254: FF        db  $FF
+
+0255: FF        db  $FF
+
+0256: FF        db  $FF
+
+0257: FF        db  $FF
+
+0258: FF        db  $FF
+
+0259: FF        db  $FF
+
+025A: FF        db  $FF
+
+025B: FF        db  $FF
+
+025C: FF        db  $FF
+
+025D: FF        db  $FF
+
+025E: FF        db  $FF
+
+025F: FF        db  $FF
+
+0260: FF        db  $FF
+
+0261: FF        db  $FF
+
+0262: FF        db  $FF
+
+0263: FF        db  $FF
+
+0264: FF        db  $FF
+
+0265: FF        db  $FF
+
+0266: FF        db  $FF
+
+0267: FF        db  $FF
+
+0268: FF        db  $FF
+
+0269: FF        db  $FF
+
+026A: FF        db  $FF
+
+026B: FF        db  $FF
+
+026C: FF        db  $FF
+
+026D: FF        db  $FF
+
+026E: FF        db  $FF
+
+026F: FF        db  $FF
+
+0270: FF        db  $FF
+
+0271: FF        db  $FF
+
+0272: FF        db  $FF
+
+0273: FF        db  $FF
+
+0274: FF        db  $FF
+
+0275: FF        db  $FF
+
+0276: FF        db  $FF
+
+0277: FF        db  $FF
+
+0278: FF        db  $FF
+
+0279: FF        db  $FF
+
+027A: FF        db  $FF
+
+027B: FF        db  $FF
+
+027C: FF        db  $FF
+
+027D: FF        db  $FF
+
+027E: FF        db  $FF
+
+027F: FF        db  $FF
+
+0280: FF        db  $FF
+
+0281: FF        db  $FF
+
+0282: FF        db  $FF
+
+0283: FF        db  $FF
+
+0284: FF        db  $FF
+
+0285: FF        db  $FF
+
+0286: FF        db  $FF
+
+0287: FF        db  $FF
+
+0288: FF        db  $FF
+
+0289: FF        db  $FF
+
+028A: FF        db  $FF
+
+028B: FF        db  $FF
+
+028C: FF        db  $FF
+
+028D: FF        db  $FF
+
+028E: FF        db  $FF
+
+028F: FF        db  $FF
+
+0290: FF        db  $FF
+
+0291: FF        db  $FF
+
+0292: FF        db  $FF
+
+0293: FF        db  $FF
+
+0294: FF        db  $FF
+
+0295: FF        db  $FF
+
+0296: FF        db  $FF
+
+0297: FF        db  $FF
+
+0298: FF        db  $FF
+
+0299: FF        db  $FF
+
+029A: FF        db  $FF
+
+029B: FF        db  $FF
+
+029C: FF        db  $FF
+
+029D: FF        db  $FF
+
+029E: FF        db  $FF
+
+029F: FF        db  $FF
+
+02A0: FF        db  $FF
+
+02A1: FF        db  $FF
+
+02A2: FF        db  $FF
+
+02A3: FF        db  $FF
+
+02A4: FF        db  $FF
+
+02A5: FF        db  $FF
+
+02A6: FF        db  $FF
+
+02A7: FF        db  $FF
+
+02A8: FF        db  $FF
+
+02A9: FF        db  $FF
+
+02AA: FF        db  $FF
+
+02AB: FF        db  $FF
+
+02AC: FF        db  $FF
+
+02AD: FF        db  $FF
+
+02AE: FF        db  $FF
+
+02AF: FF        db  $FF
+
+02B0: FF        db  $FF
+
+02B1: FF        db  $FF
+
+02B2: FF        db  $FF
+
+02B3: FF        db  $FF
+
+02B4: FF        db  $FF
+
+02B5: FF        db  $FF
+
+02B6: FF        db  $FF
+
+02B7: FF        db  $FF
+
+02B8: FF        db  $FF
+
+02B9: FF        db  $FF
+
+02BA: FF        db  $FF
+
+02BB: FF        db  $FF
+
+02BC: FF        db  $FF
+
+02BD: FF        db  $FF
+
+02BE: FF        db  $FF
+
+02BF: FF        db  $FF
+
+02C0: FF        db  $FF
+
+02C1: FF        db  $FF
+
+02C2: FF        db  $FF
+
+02C3: FF        db  $FF
+
+02C4: FF        db  $FF
+
+02C5: FF        db  $FF
+
+02C6: FF        db  $FF
+
+02C7: FF        db  $FF
+
+02C8: FF        db  $FF
+
+02C9: FF        db  $FF
+
+02CA: FF        db  $FF
+
+02CB: FF        db  $FF
+
+02CC: FF        db  $FF
+
+02CD: FF        db  $FF
+
+02CE: FF        db  $FF
+
+02CF: FF        db  $FF
+
+02D0: FF        db  $FF
+
+02D1: FF        db  $FF
+
+02D2: FF        db  $FF
+
+02D3: FF        db  $FF
+
+02D4: FF        db  $FF
+
+02D5: FF        db  $FF
+
+02D6: FF        db  $FF
+
+02D7: FF        db  $FF
+
+02D8: FF        db  $FF
+
+02D9: FF        db  $FF
+
+02DA: FF        db  $FF
+
+02DB: FF        db  $FF
+
+02DC: FF        db  $FF
+
+02DD: FF        db  $FF
+
+02DE: FF        db  $FF
+
+02DF: FF        db  $FF
+
+02E0: FF        db  $FF
+
+02E1: FF        db  $FF
+
+02E2: FF        db  $FF
+
+02E3: FF        db  $FF
+
+02E4: FF        db  $FF
+
+02E5: FF        db  $FF
+
+02E6: FF        db  $FF
+
+02E7: FF        db  $FF
+
+02E8: FF        db  $FF
+
+02E9: FF        db  $FF
+
+02EA: FF        db  $FF
+
+02EB: FF        db  $FF
+
+02EC: FF        db  $FF
+
+02ED: FF        db  $FF
+
+02EE: FF        db  $FF
+
+02EF: FF        db  $FF
+
+02F0: FF        db  $FF
+
+02F1: FF        db  $FF
+
+02F2: FF        db  $FF
+
+02F3: FF        db  $FF
+
+02F4: FF        db  $FF
+
+02F5: FF        db  $FF
+
+02F6: FF        db  $FF
+
+02F7: FF        db  $FF
+
+02F8: FF        db  $FF
+
+02F9: FF        db  $FF
+
+02FA: FF        db  $FF
+
+02FB: FF        db  $FF
+
+02FC: FF        db  $FF
+
+02FD: FF        db  $FF
+
+02FE: FF        db  $FF
+
+02FF: FF        db  $FF
+
+0300: FF        db  $FF
+
+0301: FF        db  $FF
+
+0302: FF        db  $FF
+
+0303: FF        db  $FF
+
+0304: FF        db  $FF
+
+0305: FF        db  $FF
+
+0306: FF        db  $FF
+
+0307: FF        db  $FF
+
+0308: FF        db  $FF
+
+0309: FF        db  $FF
+
+030A: FF        db  $FF
+
+030B: FF        db  $FF
+
+030C: FF        db  $FF
+
+030D: FF        db  $FF
+
+030E: FF        db  $FF
+
+030F: FF        db  $FF
+
+0310: FF        db  $FF
+
+0311: FF        db  $FF
+
+0312: FF        db  $FF
+
+0313: FF        db  $FF
+
+0314: FF        db  $FF
+
+0315: FF        db  $FF
+
+0316: FF        db  $FF
+
+0317: FF        db  $FF
+
+0318: FF        db  $FF
+
+0319: FF        db  $FF
+
+031A: FF        db  $FF
+
+031B: FF        db  $FF
+
+031C: FF        db  $FF
+
+031D: FF        db  $FF
+
+031E: FF        db  $FF
+
+031F: FF        db  $FF
+
+0320: FF        db  $FF
+
+0321: FF        db  $FF
+
+0322: FF        db  $FF
+
+0323: FF        db  $FF
+
+0324: FF        db  $FF
+
+0325: FF        db  $FF
+
+0326: FF        db  $FF
+
+0327: FF        db  $FF
+
+0328: FF        db  $FF
+
+0329: FF        db  $FF
+
+032A: FF        db  $FF
+
+032B: FF        db  $FF
+
+032C: FF        db  $FF
+
+032D: FF        db  $FF
+
+032E: FF        db  $FF
+
+032F: FF        db  $FF
+
+0330: FF        db  $FF
+
+0331: FF        db  $FF
+
+0332: FF        db  $FF
+
+0333: FF        db  $FF
+
+0334: FF        db  $FF
+
+0335: FF        db  $FF
+
+0336: FF        db  $FF
+
+0337: FF        db  $FF
+
+0338: FF        db  $FF
+
+0339: FF        db  $FF
+
+033A: FF        db  $FF
+
+033B: FF        db  $FF
+
+033C: FF        db  $FF
+
+033D: FF        db  $FF
+
+033E: FF        db  $FF
+
+033F: FF        db  $FF
+
+0340: FF        db  $FF
+
+0341: FF        db  $FF
+
+0342: FF        db  $FF
+
+0343: FF        db  $FF
+
+0344: FF        db  $FF
+
+0345: FF        db  $FF
+
+0346: FF        db  $FF
+
+0347: FF        db  $FF
+
+0348: FF        db  $FF
+
+0349: FF        db  $FF
+
+034A: FF        db  $FF
+
+034B: FF        db  $FF
+
+034C: FF        db  $FF
+
+034D: FF        db  $FF
+
+034E: FF        db  $FF
+
+034F: FF        db  $FF
+
+0350: FF        db  $FF
+
+0351: FF        db  $FF
+
+0352: FF        db  $FF
+
+0353: FF        db  $FF
+
+0354: FF        db  $FF
+
+0355: FF        db  $FF
+
+0356: FF        db  $FF
+
+0357: FF        db  $FF
+
+0358: FF        db  $FF
+
+0359: FF        db  $FF
+
+035A: FF        db  $FF
+
+035B: FF        db  $FF
+
+035C: FF        db  $FF
+
+035D: FF        db  $FF
+
+035E: FF        db  $FF
+
+035F: FF        db  $FF
+
+0360: FF        db  $FF
+
+0361: FF        db  $FF
+
+0362: FF        db  $FF
+
+0363: FF        db  $FF
+
+0364: FF        db  $FF
+
+0365: FF        db  $FF
+
+0366: FF        db  $FF
+
+0367: FF        db  $FF
+
+0368: FF        db  $FF
+
+0369: FF        db  $FF
+
+036A: FF        db  $FF
+
+036B: FF        db  $FF
+
+036C: FF        db  $FF
+
+036D: FF        db  $FF
+
+036E: FF        db  $FF
+
+036F: FF        db  $FF
+
+0370: FF        db  $FF
+
+0371: FF        db  $FF
+
+0372: FF        db  $FF
+
+0373: FF        db  $FF
+
+0374: FF        db  $FF
+
+0375: FF        db  $FF
+
+0376: FF        db  $FF
+
+0377: FF        db  $FF
+
+0378: FF        db  $FF
+
+0379: FF        db  $FF
+
+037A: FF        db  $FF
+
+037B: FF        db  $FF
+
+037C: FF        db  $FF
+
+037D: FF        db  $FF
+
+037E: FF        db  $FF
+
+037F: FF        db  $FF
+
+0380: FF        db  $FF
+
+0381: FF        db  $FF
+
+0382: FF        db  $FF
+
+0383: FF        db  $FF
+
+0384: FF        db  $FF
+
+0385: FF        db  $FF
+
+0386: FF        db  $FF
+
+0387: FF        db  $FF
+
+0388: FF        db  $FF
+
+0389: FF        db  $FF
+
+038A: FF        db  $FF
+
+038B: FF        db  $FF
+
+038C: FF        db  $FF
+
+038D: FF        db  $FF
+
+038E: FF        db  $FF
+
+038F: FF        db  $FF
+
+0390: FF        db  $FF
+
+0391: FF        db  $FF
+
+0392: FF        db  $FF
+
+0393: FF        db  $FF
+
+0394: FF        db  $FF
+
+0395: FF        db  $FF
+
+0396: FF        db  $FF
+
+0397: FF        db  $FF
+
+0398: FF        db  $FF
+
+0399: FF        db  $FF
+
+039A: FF        db  $FF
+
+039B: FF        db  $FF
+
+039C: FF        db  $FF
+
+039D: FF        db  $FF
+
+039E: FF        db  $FF
+
+039F: FF        db  $FF
+
+03A0: FF        db  $FF
+
+03A1: FF        db  $FF
+
+03A2: FF        db  $FF
+
+03A3: FF        db  $FF
+
+03A4: FF        db  $FF
+
+03A5: FF        db  $FF
+
+03A6: FF        db  $FF
+
+03A7: FF        db  $FF
+
+03A8: FF        db  $FF
+
+03A9: FF        db  $FF
+
+03AA: FF        db  $FF
+
+03AB: FF        db  $FF
+
+03AC: FF        db  $FF
+
+03AD: FF        db  $FF
+
+03AE: FF        db  $FF
+
+03AF: FF        db  $FF
+
+03B0: FF        db  $FF
+
+03B1: FF        db  $FF
+
+03B2: FF        db  $FF
+
+03B3: FF        db  $FF
+
+03B4: FF        db  $FF
+
+03B5: FF        db  $FF
+
+03B6: FF        db  $FF
+
+03B7: FF        db  $FF
+
+03B8: FF        db  $FF
+
+03B9: FF        db  $FF
+
+03BA: FF        db  $FF
+
+03BB: FF        db  $FF
+
+03BC: FF        db  $FF
+
+03BD: FF        db  $FF
+
+03BE: FF        db  $FF
+
+03BF: FF        db  $FF
+
+03C0: FF        db  $FF
+
+03C1: FF        db  $FF
+
+03C2: FF        db  $FF
+
+03C3: FF        db  $FF
+
+03C4: FF        db  $FF
+
+03C5: FF        db  $FF
+
+03C6: FF        db  $FF
+
+03C7: FF        db  $FF
+
+03C8: FF        db  $FF
+
+03C9: FF        db  $FF
+
+03CA: FF        db  $FF
+
+03CB: FF        db  $FF
+
+03CC: FF        db  $FF
+
+03CD: FF        db  $FF
+
+03CE: FF        db  $FF
+
+03CF: FF        db  $FF
+
+03D0: FF        db  $FF
+
+03D1: FF        db  $FF
+
+03D2: FF        db  $FF
+
+03D3: FF        db  $FF
+
+03D4: FF        db  $FF
+
+03D5: FF        db  $FF
+
+03D6: FF        db  $FF
+
+03D7: FF        db  $FF
+
+03D8: FF        db  $FF
+
+03D9: FF        db  $FF
+
+03DA: FF        db  $FF
+
+03DB: FF        db  $FF
+
+03DC: FF        db  $FF
+
+03DD: FF        db  $FF
+
+03DE: FF        db  $FF
+
+03DF: FF        db  $FF
+
+03E0: FF        db  $FF
+
+03E1: FF        db  $FF
+
+03E2: FF        db  $FF
+
+03E3: FF        db  $FF
+
+03E4: FF        db  $FF
+
+03E5: FF        db  $FF
+
+03E6: FF        db  $FF
+
+03E7: FF        db  $FF
+
+03E8: FF        db  $FF
+
+03E9: FF        db  $FF
+
+03EA: FF        db  $FF
+
+03EB: FF        db  $FF
+
+03EC: FF        db  $FF
+
+03ED: FF        db  $FF
+
+03EE: FF        db  $FF
+
+03EF: FF        db  $FF
+
+03F0: FF        db  $FF
+
+03F1: FF        db  $FF
+
+03F2: FF        db  $FF
+
+03F3: FF        db  $FF
+
+03F4: FF        db  $FF
+
+03F5: FF        db  $FF
+
+03F6: FF        db  $FF
+
+03F7: FF        db  $FF
+
+03F8: FF        db  $FF
+
+03F9: FF        db  $FF
+
+03FA: FF        db  $FF
+
+03FB: FF        db  $FF
+
+03FC: FF        db  $FF
+
+03FD: FF        db  $FF
+
+03FE: FF        db  $FF
+
+03FF: FF        db  $FF
+
+0400: FF        db  $FF
+
+0401: FF        db  $FF
+
+0402: FF        db  $FF
+
+0403: FF        db  $FF
+
+0404: FF        db  $FF
+
+0405: FF        db  $FF
+
+0406: FF        db  $FF
+
+0407: FF        db  $FF
+
+0408: FF        db  $FF
+
+0409: FF        db  $FF
+
+040A: FF        db  $FF
+
+040B: FF        db  $FF
+
+040C: FF        db  $FF
+
+040D: FF        db  $FF
+
+040E: FF        db  $FF
+
+040F: FF        db  $FF
+
+0410: FF        db  $FF
+
+0411: FF        db  $FF
+
+0412: FF        db  $FF
+
+0413: FF        db  $FF
+
+0414: FF        db  $FF
+
+0415: FF        db  $FF
+
+0416: FF        db  $FF
+
+0417: FF        db  $FF
+
+0418: FF        db  $FF
+
+0419: FF        db  $FF
+
+041A: FF        db  $FF
+
+041B: FF        db  $FF
+
+041C: FF        db  $FF
+
+041D: FF        db  $FF
+
+041E: FF        db  $FF
+
+041F: FF        db  $FF
+
+0420: FF        db  $FF
+
+0421: FF        db  $FF
+
+0422: FF        db  $FF
+
+0423: FF        db  $FF
+
+0424: FF        db  $FF
+
+0425: FF        db  $FF
+
+0426: FF        db  $FF
+
+0427: FF        db  $FF
+
+0428: FF        db  $FF
+
+0429: FF        db  $FF
+
+042A: FF        db  $FF
+
+042B: FF        db  $FF
+
+042C: FF        db  $FF
+
+042D: FF        db  $FF
+
+042E: FF        db  $FF
+
+042F: FF        db  $FF
+
+0430: FF        db  $FF
+
+0431: FF        db  $FF
+
+0432: FF        db  $FF
+
+0433: FF        db  $FF
+
+0434: FF        db  $FF
+
+0435: FF        db  $FF
+
+0436: FF        db  $FF
+
+0437: FF        db  $FF
+
+0438: FF        db  $FF
+
+0439: FF        db  $FF
+
+043A: FF        db  $FF
+
+043B: FF        db  $FF
+
+043C: FF        db  $FF
+
+043D: FF        db  $FF
+
+043E: FF        db  $FF
+
+043F: FF        db  $FF
+
+0440: FF        db  $FF
+
+0441: FF        db  $FF
+
+0442: FF        db  $FF
+
+0443: FF        db  $FF
+
+0444: FF        db  $FF
+
+0445: FF        db  $FF
+
+0446: FF        db  $FF
+
+0447: FF        db  $FF
+
+0448: FF        db  $FF
+
+0449: FF        db  $FF
+
+044A: FF        db  $FF
+
+044B: FF        db  $FF
+
+044C: FF        db  $FF
+
+044D: FF        db  $FF
+
+044E: FF        db  $FF
+
+044F: FF        db  $FF
+
+0450: FF        db  $FF
+
+0451: FF        db  $FF
+
+0452: FF        db  $FF
+
+0453: FF        db  $FF
+
+0454: FF        db  $FF
+
+0455: FF        db  $FF
+
+0456: FF        db  $FF
+
+0457: FF        db  $FF
+
+0458: FF        db  $FF
+
+0459: FF        db  $FF
+
+045A: FF        db  $FF
+
+045B: FF        db  $FF
+
+045C: FF        db  $FF
+
+045D: FF        db  $FF
+
+045E: FF        db  $FF
+
+045F: FF        db  $FF
+
+0460: FF        db  $FF
+
+0461: FF        db  $FF
+
+0462: FF        db  $FF
+
+0463: FF        db  $FF
+
+0464: FF        db  $FF
+
+0465: FF        db  $FF
+
+0466: FF        db  $FF
+
+0467: FF        db  $FF
+
+0468: FF        db  $FF
+
+0469: FF        db  $FF
+
+046A: FF        db  $FF
+
+046B: FF        db  $FF
+
+046C: FF        db  $FF
+
+046D: FF        db  $FF
+
+046E: FF        db  $FF
+
+046F: FF        db  $FF
+
+0470: FF        db  $FF
+
+0471: FF        db  $FF
+
+0472: FF        db  $FF
+
+0473: FF        db  $FF
+
+0474: FF        db  $FF
+
+0475: FF        db  $FF
+
+0476: FF        db  $FF
+
+0477: FF        db  $FF
+
+0478: FF        db  $FF
+
+0479: FF        db  $FF
+
+047A: FF        db  $FF
+
+047B: FF        db  $FF
+
+047C: FF        db  $FF
+
+047D: FF        db  $FF
+
+047E: FF        db  $FF
+
+047F: FF        db  $FF
+
+0480: FF        db  $FF
+
+0481: FF        db  $FF
+
+0482: FF        db  $FF
+
+0483: FF        db  $FF
+
+0484: FF        db  $FF
+
+0485: FF        db  $FF
+
+0486: FF        db  $FF
+
+0487: FF        db  $FF
+
+0488: FF        db  $FF
+
+0489: FF        db  $FF
+
+048A: FF        db  $FF
+
+048B: FF        db  $FF
+
+048C: FF        db  $FF
+
+048D: FF        db  $FF
+
+048E: FF        db  $FF
+
+048F: FF        db  $FF
+
+0490: FF        db  $FF
+
+0491: FF        db  $FF
+
+0492: FF        db  $FF
+
+0493: FF        db  $FF
+
+0494: FF        db  $FF
+
+0495: FF        db  $FF
+
+0496: FF        db  $FF
+
+0497: FF        db  $FF
+
+0498: FF        db  $FF
+
+0499: FF        db  $FF
+
+049A: FF        db  $FF
+
+049B: FF        db  $FF
+
+049C: FF        db  $FF
+
+049D: FF        db  $FF
+
+049E: FF        db  $FF
+
+049F: FF        db  $FF
+
+04A0: FF        db  $FF
+
+04A1: FF        db  $FF
+
+04A2: FF        db  $FF
+
+04A3: FF        db  $FF
+
+04A4: FF        db  $FF
+
+04A5: FF        db  $FF
+
+04A6: FF        db  $FF
+
+04A7: FF        db  $FF
+
+04A8: FF        db  $FF
+
+04A9: FF        db  $FF
+
+04AA: FF        db  $FF
+
+04AB: FF        db  $FF
+
+04AC: FF        db  $FF
+
+04AD: FF        db  $FF
+
+04AE: FF        db  $FF
+
+04AF: FF        db  $FF
+
+04B0: FF        db  $FF
+
+04B1: FF        db  $FF
+
+04B2: FF        db  $FF
+
+04B3: FF        db  $FF
+
+04B4: FF        db  $FF
+
+04B5: FF        db  $FF
+
+04B6: FF        db  $FF
+
+04B7: FF        db  $FF
+
+04B8: FF        db  $FF
+
+04B9: FF        db  $FF
+
+04BA: FF        db  $FF
+
+04BB: FF        db  $FF
+
+04BC: FF        db  $FF
+
+04BD: FF        db  $FF
+
+04BE: FF        db  $FF
+
+04BF: FF        db  $FF
+
+04C0: FF        db  $FF
+
+04C1: FF        db  $FF
+
+04C2: FF        db  $FF
+
+04C3: FF        db  $FF
+
+04C4: FF        db  $FF
+
+04C5: FF        db  $FF
+
+04C6: FF        db  $FF
+
+04C7: FF        db  $FF
+
+04C8: FF        db  $FF
+
+04C9: FF        db  $FF
+
+04CA: FF        db  $FF
+
+04CB: FF        db  $FF
+
+04CC: FF        db  $FF
+
+04CD: FF        db  $FF
+
+04CE: FF        db  $FF
+
+04CF: FF        db  $FF
+
+04D0: FF        db  $FF
+
+04D1: FF        db  $FF
+
+04D2: FF        db  $FF
+
+04D3: FF        db  $FF
+
+04D4: FF        db  $FF
+
+04D5: FF        db  $FF
+
+04D6: FF        db  $FF
+
+04D7: FF        db  $FF
+
+04D8: FF        db  $FF
+
+04D9: FF        db  $FF
+
+04DA: FF        db  $FF
+
+04DB: FF        db  $FF
+
+04DC: FF        db  $FF
+
+04DD: FF        db  $FF
+
+04DE: FF        db  $FF
+
+04DF: FF        db  $FF
+
+04E0: FF        db  $FF
+
+04E1: FF        db  $FF
+
+04E2: FF        db  $FF
+
+04E3: FF        db  $FF
+
+04E4: FF        db  $FF
+
+04E5: FF        db  $FF
+
+04E6: FF        db  $FF
+
+04E7: FF        db  $FF
+
+04E8: FF        db  $FF
+
+04E9: FF        db  $FF
+
+04EA: FF        db  $FF
+
+04EB: FF        db  $FF
+
+04EC: FF        db  $FF
+
+04ED: FF        db  $FF
+
+04EE: FF        db  $FF
+
+04EF: FF        db  $FF
+
+04F0: FF        db  $FF
+
+04F1: FF        db  $FF
+
+04F2: FF        db  $FF
+
+04F3: FF        db  $FF
+
+04F4: FF        db  $FF
+
+04F5: FF        db  $FF
+
+04F6: FF        db  $FF
+
+04F7: FF        db  $FF
+
+04F8: FF        db  $FF
+
+04F9: FF        db  $FF
+
+04FA: FF        db  $FF
+
+04FB: FF        db  $FF
+
+04FC: FF        db  $FF
+
+04FD: FF        db  $FF
+
+04FE: FF        db  $FF
+
+04FF: FF        db  $FF
+
+0500: FF        db  $FF
+
+0501: FF        db  $FF
+
+0502: FF        db  $FF
+
+0503: FF        db  $FF
+
+0504: FF        db  $FF
+
+0505: FF        db  $FF
+
+0506: FF        db  $FF
+
+0507: FF        db  $FF
+
+0508: FF        db  $FF
+
+0509: FF        db  $FF
+
+050A: FF        db  $FF
+
+050B: FF        db  $FF
+
+050C: FF        db  $FF
+
+050D: FF        db  $FF
+
+050E: FF        db  $FF
+
+050F: FF        db  $FF
+
+0510: FF        db  $FF
+
+0511: FF        db  $FF
+
+0512: FF        db  $FF
+
+0513: FF        db  $FF
+
+0514: FF        db  $FF
+
+0515: FF        db  $FF
+
+0516: FF        db  $FF
+
+0517: FF        db  $FF
+
+0518: FF        db  $FF
+
+0519: FF        db  $FF
+
+051A: FF        db  $FF
+
+051B: FF        db  $FF
+
+051C: FF        db  $FF
+
+051D: FF        db  $FF
+
+051E: FF        db  $FF
+
+051F: FF        db  $FF
+
+0520: FF        db  $FF
+
+0521: FF        db  $FF
+
+0522: FF        db  $FF
+
+0523: FF        db  $FF
+
+0524: FF        db  $FF
+
+0525: FF        db  $FF
+
+0526: FF        db  $FF
+
+0527: FF        db  $FF
+
+0528: FF        db  $FF
+
+0529: FF        db  $FF
+
+052A: FF        db  $FF
+
+052B: FF        db  $FF
+
+052C: FF        db  $FF
+
+052D: FF        db  $FF
+
+052E: FF        db  $FF
+
+052F: FF        db  $FF
+
+0530: FF        db  $FF
+
+0531: FF        db  $FF
+
+0532: FF        db  $FF
+
+0533: FF        db  $FF
+
+0534: FF        db  $FF
+
+0535: FF        db  $FF
+
+0536: FF        db  $FF
+
+0537: FF        db  $FF
+
+0538: FF        db  $FF
+
+0539: FF        db  $FF
+
+053A: FF        db  $FF
+
+053B: FF        db  $FF
+
+053C: FF        db  $FF
+
+053D: FF        db  $FF
+
+053E: FF        db  $FF
+
+053F: FF        db  $FF
+
+0540: FF        db  $FF
+
+0541: FF        db  $FF
+
+0542: FF        db  $FF
+
+0543: FF        db  $FF
+
+0544: FF        db  $FF
+
+0545: FF        db  $FF
+
+0546: FF        db  $FF
+
+0547: FF        db  $FF
+
+0548: FF        db  $FF
+
+0549: FF        db  $FF
+
+054A: FF        db  $FF
+
+054B: FF        db  $FF
+
+054C: FF        db  $FF
+
+054D: FF        db  $FF
+
+054E: FF        db  $FF
+
+054F: FF        db  $FF
+
+0550: FF        db  $FF
+
+0551: FF        db  $FF
+
+0552: FF        db  $FF
+
+0553: FF        db  $FF
+
+0554: FF        db  $FF
+
+0555: FF        db  $FF
+
+0556: FF        db  $FF
+
+0557: FF        db  $FF
+
+0558: FF        db  $FF
+
+0559: FF        db  $FF
+
+055A: FF        db  $FF
+
+055B: FF        db  $FF
+
+055C: FF        db  $FF
+
+055D: FF        db  $FF
+
+055E: FF        db  $FF
+
+055F: FF        db  $FF
+
+0560: FF        db  $FF
+
+0561: FF        db  $FF
+
+0562: FF        db  $FF
+
+0563: FF        db  $FF
+
+0564: FF        db  $FF
+
+0565: FF        db  $FF
+
+0566: FF        db  $FF
+
+0567: FF        db  $FF
+
+0568: FF        db  $FF
+
+0569: FF        db  $FF
+
+056A: FF        db  $FF
+
+056B: FF        db  $FF
+
+056C: FF        db  $FF
+
+056D: FF        db  $FF
+
+056E: FF        db  $FF
+
+056F: FF        db  $FF
+
+0570: FF        db  $FF
+
+0571: FF        db  $FF
+
+0572: FF        db  $FF
+
+0573: FF        db  $FF
+
+0574: FF        db  $FF
+
+0575: FF        db  $FF
+
+0576: FF        db  $FF
+
+0577: FF        db  $FF
+
+0578: FF        db  $FF
+
+0579: FF        db  $FF
+
+057A: FF        db  $FF
+
+057B: FF        db  $FF
+
+057C: FF        db  $FF
+
+057D: FF        db  $FF
+
+057E: FF        db  $FF
+
+057F: FF        db  $FF
+
+0580: FF        db  $FF
+
+0581: FF        db  $FF
+
+0582: FF        db  $FF
+
+0583: FF        db  $FF
+
+0584: FF        db  $FF
+
+0585: FF        db  $FF
+
+0586: FF        db  $FF
+
+0587: FF        db  $FF
+
+0588: FF        db  $FF
+
+0589: FF        db  $FF
+
+058A: FF        db  $FF
+
+058B: FF        db  $FF
+
+058C: FF        db  $FF
+
+058D: FF        db  $FF
+
+058E: FF        db  $FF
+
+058F: FF        db  $FF
+
+0590: FF        db  $FF
+
+0591: FF        db  $FF
+
+0592: FF        db  $FF
+
+0593: FF        db  $FF
+
+0594: FF        db  $FF
+
+0595: FF        db  $FF
+
+0596: FF        db  $FF
+
+0597: FF        db  $FF
+
+0598: FF        db  $FF
+
+0599: FF        db  $FF
+
+059A: FF        db  $FF
+
+059B: FF        db  $FF
+
+059C: FF        db  $FF
+
+059D: FF        db  $FF
+
+059E: FF        db  $FF
+
+059F: FF        db  $FF
+
+05A0: FF        db  $FF
+
+05A1: FF        db  $FF
+
+05A2: FF        db  $FF
+
+05A3: FF        db  $FF
+
+05A4: FF        db  $FF
+
+05A5: FF        db  $FF
+
+05A6: FF        db  $FF
+
+05A7: FF        db  $FF
+
+05A8: FF        db  $FF
+
+05A9: FF        db  $FF
+
+05AA: FF        db  $FF
+
+05AB: FF        db  $FF
+
+05AC: FF        db  $FF
+
+05AD: FF        db  $FF
+
+05AE: FF        db  $FF
+
+05AF: FF        db  $FF
+
+05B0: FF        db  $FF
+
+05B1: FF        db  $FF
+
+05B2: FF        db  $FF
+
+05B3: FF        db  $FF
+
+05B4: FF        db  $FF
+
+05B5: FF        db  $FF
+
+05B6: FF        db  $FF
+
+05B7: FF        db  $FF
+
+05B8: FF        db  $FF
+
+05B9: FF        db  $FF
+
+05BA: FF        db  $FF
+
+05BB: FF        db  $FF
+
+05BC: FF        db  $FF
+
+05BD: FF        db  $FF
+
+05BE: FF        db  $FF
+
+05BF: FF        db  $FF
+
+05C0: FF        db  $FF
+
+05C1: FF        db  $FF
+
+05C2: FF        db  $FF
+
+05C3: FF        db  $FF
+
+05C4: FF        db  $FF
+
+05C5: FF        db  $FF
+
+05C6: FF        db  $FF
+
+05C7: FF        db  $FF
+
+05C8: FF        db  $FF
+
+05C9: FF        db  $FF
+
+05CA: FF        db  $FF
+
+05CB: FF        db  $FF
+
+05CC: FF        db  $FF
+
+05CD: FF        db  $FF
+
+05CE: FF        db  $FF
+
+05CF: FF        db  $FF
+
+05D0: FF        db  $FF
+
+05D1: FF        db  $FF
+
+05D2: FF        db  $FF
+
+05D3: FF        db  $FF
+
+05D4: FF        db  $FF
+
+05D5: FF        db  $FF
+
+05D6: FF        db  $FF
+
+05D7: FF        db  $FF
+
+05D8: FF        db  $FF
+
+05D9: FF        db  $FF
+
+05DA: FF        db  $FF
+
+05DB: FF        db  $FF
+
+05DC: FF        db  $FF
+
+05DD: FF        db  $FF
+
+05DE: FF        db  $FF
+
+05DF: FF        db  $FF
+
+05E0: FF        db  $FF
+
+05E1: FF        db  $FF
+
+05E2: FF        db  $FF
+
+05E3: FF        db  $FF
+
+05E4: FF        db  $FF
+
+05E5: FF        db  $FF
+
+05E6: FF        db  $FF
+
+05E7: FF        db  $FF
+
+05E8: FF        db  $FF
+
+05E9: FF        db  $FF
+
+05EA: FF        db  $FF
+
+05EB: FF        db  $FF
+
+05EC: FF        db  $FF
+
+05ED: FF        db  $FF
+
+05EE: FF        db  $FF
+
+05EF: FF        db  $FF
+
+05F0: FF        db  $FF
+
+05F1: FF        db  $FF
+
+05F2: FF        db  $FF
+
+05F3: FF        db  $FF
+
+05F4: FF        db  $FF
+
+05F5: FF        db  $FF
+
+05F6: FF        db  $FF
+
+05F7: FF        db  $FF
+
+05F8: FF        db  $FF
+
+05F9: FF        db  $FF
+
+05FA: FF        db  $FF
+
+05FB: FF        db  $FF
+
+05FC: FF        db  $FF
+
+05FD: FF        db  $FF
+
+05FE: FF        db  $FF
+
+05FF: FF        db  $FF
+
+0600: FF        db  $FF
+
+0601: FF        db  $FF
+
+0602: FF        db  $FF
+
+0603: FF        db  $FF
+
+0604: FF        db  $FF
+
+0605: FF        db  $FF
+
+0606: FF        db  $FF
+
+0607: FF        db  $FF
+
+0608: FF        db  $FF
+
+0609: FF        db  $FF
+
+060A: FF        db  $FF
+
+060B: FF        db  $FF
+
+060C: FF        db  $FF
+
+060D: FF        db  $FF
+
+060E: FF        db  $FF
+
+060F: FF        db  $FF
+
+0610: FF        db  $FF
+
+0611: FF        db  $FF
+
+0612: FF        db  $FF
+
+0613: FF        db  $FF
+
+0614: FF        db  $FF
+
+0615: FF        db  $FF
+
+0616: FF        db  $FF
+
+0617: FF        db  $FF
+
+0618: FF        db  $FF
+
+0619: FF        db  $FF
+
+061A: FF        db  $FF
+
+061B: FF        db  $FF
+
+061C: FF        db  $FF
+
+061D: FF        db  $FF
+
+061E: FF        db  $FF
+
+061F: FF        db  $FF
+
+0620: FF        db  $FF
+
+0621: FF        db  $FF
+
+0622: FF        db  $FF
+
+0623: FF        db  $FF
+
+0624: FF        db  $FF
+
+0625: FF        db  $FF
+
+0626: FF        db  $FF
+
+0627: FF        db  $FF
+
+0628: FF        db  $FF
+
+0629: FF        db  $FF
+
+062A: FF        db  $FF
+
+062B: FF        db  $FF
+
+062C: FF        db  $FF
+
+062D: FF        db  $FF
+
+062E: FF        db  $FF
+
+062F: FF        db  $FF
+
+0630: FF        db  $FF
+
+0631: FF        db  $FF
+
+0632: FF        db  $FF
+
+0633: FF        db  $FF
+
+0634: FF        db  $FF
+
+0635: FF        db  $FF
+
+0636: FF        db  $FF
+
+0637: FF        db  $FF
+
+0638: FF        db  $FF
+
+0639: FF        db  $FF
+
+063A: FF        db  $FF
+
+063B: FF        db  $FF
+
+063C: FF        db  $FF
+
+063D: FF        db  $FF
+
+063E: FF        db  $FF
+
+063F: FF        db  $FF
+
+0640: FF        db  $FF
+
+0641: FF        db  $FF
+
+0642: FF        db  $FF
+
+0643: FF        db  $FF
+
+0644: FF        db  $FF
+
+0645: FF        db  $FF
+
+0646: FF        db  $FF
+
+0647: FF        db  $FF
+
+0648: FF        db  $FF
+
+0649: FF        db  $FF
+
+064A: FF        db  $FF
+
+064B: FF        db  $FF
+
+064C: FF        db  $FF
+
+064D: FF        db  $FF
+
+064E: FF        db  $FF
+
+064F: FF        db  $FF
+
+0650: FF        db  $FF
+
+0651: FF        db  $FF
+
+0652: FF        db  $FF
+
+0653: FF        db  $FF
+
+0654: FF        db  $FF
+
+0655: FF        db  $FF
+
+0656: FF        db  $FF
+
+0657: FF        db  $FF
+
+0658: FF        db  $FF
+
+0659: FF        db  $FF
+
+065A: FF        db  $FF
+
+065B: FF        db  $FF
+
+065C: FF        db  $FF
+
+065D: FF        db  $FF
+
+065E: FF        db  $FF
+
+065F: FF        db  $FF
+
+0660: FF        db  $FF
+
+0661: FF        db  $FF
+
+0662: FF        db  $FF
+
+0663: FF        db  $FF
+
+0664: FF        db  $FF
+
+0665: FF        db  $FF
+
+0666: FF        db  $FF
+
+0667: FF        db  $FF
+
+0668: FF        db  $FF
+
+0669: FF        db  $FF
+
+066A: FF        db  $FF
+
+066B: FF        db  $FF
+
+066C: FF        db  $FF
+
+066D: FF        db  $FF
+
+066E: FF        db  $FF
+
+066F: FF        db  $FF
+
+0670: FF        db  $FF
+
+0671: FF        db  $FF
+
+0672: FF        db  $FF
+
+0673: FF        db  $FF
+
+0674: FF        db  $FF
+
+0675: FF        db  $FF
+
+0676: FF        db  $FF
+
+0677: FF        db  $FF
+
+0678: FF        db  $FF
+
+0679: FF        db  $FF
+
+067A: FF        db  $FF
+
+067B: FF        db  $FF
+
+067C: FF        db  $FF
+
+067D: FF        db  $FF
+
+067E: FF        db  $FF
+
+067F: FF        db  $FF
+
+0680: FF        db  $FF
+
+0681: FF        db  $FF
+
+0682: FF        db  $FF
+
+0683: FF        db  $FF
+
+0684: FF        db  $FF
+
+0685: FF        db  $FF
+
+0686: FF        db  $FF
+
+0687: FF        db  $FF
+
+0688: FF        db  $FF
+
+0689: FF        db  $FF
+
+068A: FF        db  $FF
+
+068B: FF        db  $FF
+
+068C: FF        db  $FF
+
+068D: FF        db  $FF
+
+068E: FF        db  $FF
+
+068F: FF        db  $FF
+
+0690: FF        db  $FF
+
+0691: FF        db  $FF
+
+0692: FF        db  $FF
+
+0693: FF        db  $FF
+
+0694: FF        db  $FF
+
+0695: FF        db  $FF
+
+0696: FF        db  $FF
+
+0697: FF        db  $FF
+
+0698: FF        db  $FF
+
+0699: FF        db  $FF
+
+069A: FF        db  $FF
+
+069B: FF        db  $FF
+
+069C: FF        db  $FF
+
+069D: FF        db  $FF
+
+069E: FF        db  $FF
+
+069F: FF        db  $FF
+
+06A0: FF        db  $FF
+
+06A1: FF        db  $FF
+
+06A2: FF        db  $FF
+
+06A3: FF        db  $FF
+
+06A4: FF        db  $FF
+
+06A5: FF        db  $FF
+
+06A6: FF        db  $FF
+
+06A7: FF        db  $FF
+
+06A8: FF        db  $FF
+
+06A9: FF        db  $FF
+
+06AA: FF        db  $FF
+
+06AB: FF        db  $FF
+
+06AC: FF        db  $FF
+
+06AD: FF        db  $FF
+
+06AE: FF        db  $FF
+
+06AF: FF        db  $FF
+
+06B0: FF        db  $FF
+
+06B1: FF        db  $FF
+
+06B2: FF        db  $FF
+
+06B3: FF        db  $FF
+
+06B4: FF        db  $FF
+
+06B5: FF        db  $FF
+
+06B6: FF        db  $FF
+
+06B7: FF        db  $FF
+
+06B8: FF        db  $FF
+
+06B9: FF        db  $FF
+
+06BA: FF        db  $FF
+
+06BB: FF        db  $FF
+
+06BC: FF        db  $FF
+
+06BD: FF        db  $FF
+
+06BE: FF        db  $FF
+
+06BF: FF        db  $FF
+
+06C0: FF        db  $FF
+
+06C1: FF        db  $FF
+
+06C2: FF        db  $FF
+
+06C3: FF        db  $FF
+
+06C4: FF        db  $FF
+
+06C5: FF        db  $FF
+
+06C6: FF        db  $FF
+
+06C7: FF        db  $FF
+
+06C8: FF        db  $FF
+
+06C9: FF        db  $FF
+
+06CA: FF        db  $FF
+
+06CB: FF        db  $FF
+
+06CC: FF        db  $FF
+
+06CD: FF        db  $FF
+
+06CE: FF        db  $FF
+
+06CF: FF        db  $FF
+
+06D0: FF        db  $FF
+
+06D1: FF        db  $FF
+
+06D2: FF        db  $FF
+
+06D3: FF        db  $FF
+
+06D4: FF        db  $FF
+
+06D5: FF        db  $FF
+
+06D6: FF        db  $FF
+
+06D7: FF        db  $FF
+
+06D8: FF        db  $FF
+
+06D9: FF        db  $FF
+
+06DA: FF        db  $FF
+
+06DB: FF        db  $FF
+
+06DC: FF        db  $FF
+
+06DD: FF        db  $FF
+
+06DE: FF        db  $FF
+
+06DF: FF        db  $FF
+
+06E0: FF        db  $FF
+
+06E1: FF        db  $FF
+
+06E2: FF        db  $FF
+
+06E3: FF        db  $FF
+
+06E4: FF        db  $FF
+
+06E5: FF        db  $FF
+
+06E6: FF        db  $FF
+
+06E7: FF        db  $FF
+
+06E8: FF        db  $FF
+
+06E9: FF        db  $FF
+
+06EA: FF        db  $FF
+
+06EB: FF        db  $FF
+
+06EC: FF        db  $FF
+
+06ED: FF        db  $FF
+
+06EE: FF        db  $FF
+
+06EF: FF        db  $FF
+
+06F0: FF        db  $FF
+
+06F1: FF        db  $FF
+
+06F2: FF        db  $FF
+
+06F3: FF        db  $FF
+
+06F4: FF        db  $FF
+
+06F5: FF        db  $FF
+
+06F6: FF        db  $FF
+
+06F7: FF        db  $FF
+
+06F8: FF        db  $FF
+
+06F9: FF        db  $FF
+
+06FA: FF        db  $FF
+
+06FB: FF        db  $FF
+
+06FC: FF        db  $FF
+
+06FD: FF        db  $FF
+
+06FE: FF        db  $FF
+
+06FF: FF        db  $FF
+0700: A2 20     ldx #$20	; LoaD X from memory, immediate
+0702: A2 00     ldx #$00	; LoaD X from memory, immediate
+0704: A2 03     ldx #$03	; LoaD X from memory, immediate
+0706: A2 3C     ldx #$3C	; LoaD X from memory, immediate
+0708: 08        php 		; PusH P register onto stack, implied
+0709: 78        sei 		; SEt Interrupt flag, implied
+070A: 20 00 FF  jsr $FF00	; Jump to SubRoutine, absolute
+
+070D: BA BD     tsx 		; Transfer Stack pointer to X, implied
+070F: 00        brk 		; forced BReaK, implied
+0710: 01 8D     ora ($008D),x	; OR A with memory, indirect indexed
+0712: F8        sed 		; SEt Decimal flag, implied
+
+0713: 07        db  $07
+0714: 28        plp 		; PulL P from stack, implied
+0715: 2C 00 CF  bit $CF00	; test BITs in memory with A, absolute
+0718: 4C 00 C9  jmp $C900	; JuMP to new location, absolute
+
+071B: 18        clc 		; CLear Carry flag, implied
+071C: 90 00     bcc $071E	; Branch Carry Clear, relative
+
+071E: A4 42     ldy $42		; LoaD Y from memory, zeropage
+0720: C0 03     cpy #$03	; ComPare Y with memory, immediate
+0722: F0 14     beq $0738	; Branch Equals, relative
+
+0724: AD 00 CF  lda $CF00	; LoaD A from memory, absolute
+0727: A5 43     lda $43		; LoaD A from memory, zeropage
+0729: 29 70     and #$70	; memory with A, immediate
+072B: AA        tax 		; Transfer A to X, implied
+072C: 4A        lsr a		; Logical Shift Right, accumulator
+072D: 4A        lsr a		; Logical Shift Right, accumulator
+072E: 4A        lsr a		; Logical Shift Right, accumulator
+072F: 4A        lsr a		; Logical Shift Right, accumulator
+0730: 09 C0     ora #$C0	; OR A with memory, immediate
+0732: 8D 00 07  sta $0700	; STore A into memory, absolute
+0735: 4C 00 C8  jmp $C800	; JuMP to new location, absolute
+
+0738: A9 00     lda #$00	; LoaD A from memory, immediate
+073A: 18        clc 		; CLear Carry flag, implied
+073B: 60        rts 		; ReTurn from Subroutine, implied
+
+
+073C: C3        db  $C3
+
+073D: EF        db  $EF
+073E: F0 F9     beq $0739	; Branch Equals, relative
+
+
+0740: F2        db  $F2
+0741: E9 E7     sbc #$E7	; SuBtract with borrow, immediate
+0743: E8        inx 		; INcrement X by one, implied
+
+0744: F4        db  $F4
+0745: A0 B1     ldy #$B1	; LoaD Y from memory, immediate
+0747: B9 00 B7  lda $B700,x	; LoaD A from memory, absolute indexed
+074A: A0 E6     ldy #$E6	; LoaD Y from memory, immediate
+
+074C: EF        db  $EF
+
+074D: F2        db  $F2
+074E: A0 C1     ldy #$C1	; LoaD Y from memory, immediate
+0750: E4 F6     cpx $F6		; ComPare X with memory, zeropage
+0752: E1 EE     sbc ($00EE),x	; SuBtract with borrow, indirect indexed
+
+0754: E3        db  $E3
+0755: E5 E4     sbc $E4		; SuBtract with borrow, zeropage
+0757: A0 D4     ldy #$D4	; LoaD Y from memory, immediate
+0759: E5 E3     sbc $E3		; SuBtract with borrow, zeropage
+075B: E8        inx 		; INcrement X by one, implied
+075C: A0 D3     ldy #$D3	; LoaD Y from memory, immediate
+075E: E5 F2     sbc $F2		; SuBtract with borrow, zeropage
+0760: F6 E9     inc $E9,x	; INCrement memory by one, zeropage indexed
+
+0762: E3        db  $E3
+0763: E5 F3     sbc $F3		; SuBtract with borrow, zeropage
+0765: 8D 00 F2  sta $F200	; STore A into memory, absolute
+0768: E9 F4     sbc #$F4	; SuBtract with borrow, immediate
+
+076A: F4        db  $F4
+076B: E5 EE     sbc $EE		; SuBtract with borrow, zeropage
+076D: A0 E2     ldy #$E2	; LoaD Y from memory, immediate
+076F: F9 00 CC  sbc $CC00,y	; SuBtract with borrow, absolute indexed
+0772: E1 F2     sbc ($00F2),x	; SuBtract with borrow, indirect indexed
+
+0774: F2        db  $F2
+0775: F9 00 C5  sbc $C500,y	; SuBtract with borrow, absolute indexed
+0778: AE 00 D2  ldx $D200	; LoaD X from memory, absolute
+
+077B: EF        db  $EF
+077C: E4 E4     cpx $E4		; ComPare X with memory, zeropage
+077E: E5 EE     sbc $EE		; SuBtract with borrow, zeropage
+
+0780: E2        db  $E2
+0781: E5 F2     sbc $F2		; SuBtract with borrow, zeropage
+
+0783: F2        db  $F2
+0784: F9 00 D6  sbc $D600,y	; SuBtract with borrow, absolute indexed
+0787: E5 F2     sbc $F2		; SuBtract with borrow, zeropage
+
+0789: F3        db  $F3
+078A: E9 EF     sbc #$EF	; SuBtract with borrow, immediate
+078C: EE 00 B2  inc $B200	; INCrement memory by one, absolute
+078F: AE 00 B2  ldx $B200	; LoaD X from memory, absolute
+0792: A0 A0     ldy #$A0	; LoaD Y from memory, immediate
+
+0794: B2        db  $B2
+
+0795: AF        db  $AF
+0796: B1 B6     lda ($00B6),y	; LoaD A from memory, indirect indexed
+
+0798: AF        db  $AF
+0799: B8        clv 		; CLear oVerflow flag, implied
+
+079A: B7        db  $B7
+079B: 8D 00 FF  sta $FF00	; STore A into memory, absolute
+
+079E: FF        db  $FF
+
+079F: FF        db  $FF
+
+07A0: FF        db  $FF
+
+07A1: FF        db  $FF
+
+07A2: FF        db  $FF
+
+07A3: FF        db  $FF
+
+07A4: FF        db  $FF
+
+07A5: FF        db  $FF
+
+07A6: FF        db  $FF
+
+07A7: FF        db  $FF
+
+07A8: FF        db  $FF
+
+07A9: FF        db  $FF
+
+07AA: FF        db  $FF
+
+07AB: FF        db  $FF
+
+07AC: FF        db  $FF
+
+07AD: FF        db  $FF
+
+07AE: FF        db  $FF
+
+07AF: FF        db  $FF
+
+07B0: FF        db  $FF
+
+07B1: FF        db  $FF
+
+07B2: FF        db  $FF
+
+07B3: FF        db  $FF
+
+07B4: FF        db  $FF
+
+07B5: FF        db  $FF
+
+07B6: FF        db  $FF
+
+07B7: FF        db  $FF
+
+07B8: FF        db  $FF
+
+07B9: FF        db  $FF
+
+07BA: FF        db  $FF
+
+07BB: FF        db  $FF
+
+07BC: FF        db  $FF
+
+07BD: FF        db  $FF
+
+07BE: FF        db  $FF
+
+07BF: FF        db  $FF
+
+07C0: FF        db  $FF
+
+07C1: FF        db  $FF
+
+07C2: FF        db  $FF
+
+07C3: FF        db  $FF
+
+07C4: FF        db  $FF
+
+07C5: FF        db  $FF
+
+07C6: FF        db  $FF
+
+07C7: FF        db  $FF
+
+07C8: FF        db  $FF
+
+07C9: FF        db  $FF
+
+07CA: FF        db  $FF
+
+07CB: FF        db  $FF
+
+07CC: FF        db  $FF
+
+07CD: FF        db  $FF
+
+07CE: FF        db  $FF
+
+07CF: FF        db  $FF
+
+07D0: FF        db  $FF
+
+07D1: FF        db  $FF
+
+07D2: FF        db  $FF
+
+07D3: FF        db  $FF
+
+07D4: FF        db  $FF
+
+07D5: FF        db  $FF
+
+07D6: FF        db  $FF
+
+07D7: FF        db  $FF
+
+07D8: FF        db  $FF
+
+07D9: FF        db  $FF
+
+07DA: FF        db  $FF
+
+07DB: FF        db  $FF
+
+07DC: FF        db  $FF
+
+07DD: FF        db  $FF
+
+07DE: FF        db  $FF
+
+07DF: FF        db  $FF
+
+07E0: FF        db  $FF
+
+07E1: FF        db  $FF
+
+07E2: FF        db  $FF
+
+07E3: FF        db  $FF
+
+07E4: FF        db  $FF
+
+07E5: FF        db  $FF
+
+07E6: FF        db  $FF
+
+07E7: FF        db  $FF
+
+07E8: FF        db  $FF
+
+07E9: FF        db  $FF
+
+07EA: FF        db  $FF
+
+07EB: FF        db  $FF
+
+07EC: FF        db  $FF
+
+07ED: FF        db  $FF
+
+07EE: FF        db  $FF
+
+07EF: FF        db  $FF
+
+07F0: FF        db  $FF
+
+07F1: FF        db  $FF
+
+07F2: FF        db  $FF
+
+07F3: FF        db  $FF
+
+07F4: FF        db  $FF
+
+07F5: FF        db  $FF
+
+07F6: FF        db  $FF
+
+07F7: FF        db  $FF
+
+07F8: FF        db  $FF
+
+07F9: FF        db  $FF
+
+07FA: FF        db  $FF
+
+07FB: FF        db  $FF
+07FC: 00        brk 		; forced BReaK, implied
+07FD: 00        brk 		; forced BReaK, implied

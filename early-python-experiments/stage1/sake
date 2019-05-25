@@ -1,0 +1,47 @@
+#!/usr/bin/python 
+# dumpos
+
+import os
+import sys
+
+altsep = os.altsep
+print "altsep = ",altsep
+
+copyright = sys.copyright
+print "copyright = ",copyright
+
+ctermid = os.ctermid
+print "ctermid = ",ctermid
+
+curdir = os.curdir
+print "curdir = ",curdir
+
+defpath = os.defpath
+print"defpath = ",defpath
+
+devnull = os.devnull
+print "devnull = ",devnull
+
+executable = sys.executable
+print "executable = ",executable
+
+extsep = os.extsep
+print "extsep = ",extsep
+
+linesep = os.linesep
+print "linesep = ",linesep
+
+name = os.name
+print "name = ",name
+
+pardir = os.pardir
+print "pardir = ",pardir
+
+path = os.path
+print "path = ",path
+
+pathsep = os.pathsep
+print "pathsep = ",pathsep
+
+sep = os.sep
+print "sep = ",sep

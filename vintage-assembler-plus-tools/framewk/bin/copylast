@@ -1,0 +1,3 @@
+#!/bin/bash
+cp -R -n /Users/doug/src/framewk/08112017/* .
+ls

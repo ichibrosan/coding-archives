@@ -1,0 +1,5 @@
+	printf("--------------------------------------------------\n");
+	printf("Program                   2009/12/01  Version 0.0a\n");
+	printf("Serial No. 0000-0000-654321    All Rights Reserved\n");
+	printf("Copyright (C) 1991-2010         Douglas W. Goodall\n");
+	printf("--------------------------------------------------\n");

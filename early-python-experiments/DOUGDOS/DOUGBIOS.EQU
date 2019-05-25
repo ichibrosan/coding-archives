@@ -1,0 +1,18 @@
+; dougbios.equ
+	org	100h
+cold:
+	org	104h
+warm:
+	org	108h
+const:
+	org	10ch
+conin:
+	org	110h
+conout:
+	org	114h
+msgout:
+	org	118h
+loadngo:
+	org	11ch
+term:
+; eof - dougbios.equ

@@ -1,0 +1,3 @@
+
+	org	LOADSIZE+BIOSSIZE+4
+dos_func:

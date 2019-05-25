@@ -1,0 +1,21 @@
+January 2010
+
+Douglas Goodall
+Santa Maria, CA
+douglas_goodall@mac.com
+
+I hereby license the enclosed source code comprising my
+PowerC DOS Utilities for use by the public. The code may
+embedded in new applications, but I would appreciate it
+if the documentation included "Portions licensed from
+Douglas W. Goodall".
+
+These utilities are written in ANSI C and are meant to be
+compiled using the Power C compiler from Mix Software. The
+compiler may be purchased for $19 from them. It comes with
+a big book containing examples of the use of all standard
+library routines. A fantastic buy at $19.
+
+Please enjoy these programs, I did :-)
+
+Douglas W. Goodall

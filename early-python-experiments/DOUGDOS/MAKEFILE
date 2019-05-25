@@ -1,0 +1,76 @@
+# makefile 6/2/2010 dwg - 
+# copyright (c) 2010 douglas goodall. all rights reserved.
+
+# mode can be DEBUG or RELEASE depending on whether
+# you want the code to run in DEBUG mode with hints
+MODE = DEBUG
+
+# stksiz controls the number of words (call levels)
+# allocated in the applications stack segment
+STKSIZ  = 64
+
+# as specifies which assembler is used durint the build.
+# when executing under dosbox, using the real-mode assembler
+# is required, otherwise dosbox crashes when executing 386asm
+AS      = 386asmr
+
+# the asflags pass all desired control flags into the assembler
+# for this build
+ASFLAGS = -DEFINE $(MODE) -DEFINE STK=$(STKSIZ) -FULLWARN -INCLUDE p:\include -TWOCASE 
+
+# ll specifies the linker (in this case LinkLOC) to be used
+# to convert the object file into the desired target format.
+LL      = linkloc
+
+# llflags are desired control flags for the linker.
+# in this case, the 8086 flag is good for DOSBOX,
+# and locmap requests a more comprehensive map file.
+LLFLAGS = -8086 -locmap 
+
+LN      = 386link
+
+LNFLAGS = -8086
+
+.asm.obj:	
+	$(AS) $(ASFLAGS) $&
+
+.obj.sys:
+	$(LL) $(LLFLAGS) $&.obj -binary $&.bin 0
+	@if exist $&.sys erase $&.sys
+	@rename $&.bin $&.sys
+	
+.obj.xeq:
+	$(LL) $(LLFLAGS) $&.obj -binary $&.bin 0
+	@if exist $&.xeq erase $&.xeq
+	@rename $&.bin $&.xeq
+	
+.obj.exe:
+	$(LN) $(LNFLAGS) $&.obj
+	 
+all:	loader.exe appl.xeq dougbios.sys dougdos.sys makefile
+
+# the clean target erases all files in the build that
+# are dynamically generated and don't need to be kept
+# around or provided to others since they can be easily
+# reproduced.
+clean:
+	@if exist *.obj erase *.obj
+	@if exist *.lst erase *.lst
+	@if exist *.bin erase *.bin
+	@if exist *.bak erase *.bak
+	@if exist *.map erase *.map
+	@if exist *.exe erase *.exe
+	@if exist *.sys erase *.sys
+	@if exist *.xeq erase *.xeq
+
+slim:
+	@if exist *.obj erase *.obj
+	@if exist *.lst erase *.lst
+	@if exist *.bin erase *.bin
+	@if exist *.bak erase *.bak
+	@if exist *.map erase *.map
+#	@if exist *.exe erase *.exe
+#	@if exist *.sys erase *.sys
+#	@if exist *.xeq erase *.xeq
+
+# eof - makefile

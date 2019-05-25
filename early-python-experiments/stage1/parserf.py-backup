@@ -1,0 +1,69 @@
+#!/usr/bin/python
+# parserf.py 1/6/2008 COPR doug@goodall.com
+
+# The purpose of this program is to read a file created by tcpdump
+# and generate a variety of local web pages which can be browsed to
+# examine network traffic. This version of the code is used when the
+# tcpdump was done with the -f flag. Non-local IP numbers are
+# represented by dotted octets. Dotted octets have a known number
+# of dots as opposed to fully qualified domain names within which a
+# varying number of dots may appear.
+
+import os
+os.system("rm -f /Users/doug/Sources/pages/*")
+fd1 = open("/Users/doug/Sources/pages/index.html","w")
+fd1.write("<html><head><title>")
+fd1.write("Index to parser.py generated dump pages")
+fd1.write("</title></head><body>")
+fd2 = open("/Users/doug/Sources/sample.txt","r")
+for buf in fd2.readlines():
+	index = 0
+	sTime = buf[index:index+15]
+	index += 16
+	endex = buf.find(" ",index)
+	sFrame = buf[index:endex]
+	index = endex + 1
+	endex = buf.find(".",index)
+	sOctet1 = buf[index:endex]
+	index = endex + 1
+	endex = buf.find(".",index)
+	sOctet2 = buf[index:endex]
+	index = endex + 1
+	endex = buf.find(".",index)
+	sOctet3 = buf[index:endex]
+	index = endex + 1
+	endex = buf.find(".",index)
+	sOctet4 = buf[index:endex]
+	index = endex + 1
+	endex = buf.find(" ",index)
+	sPort = buf[index:endex]
+	index = endex + 3
+	endex = buf.find(".",index)
+	dOctet1 = buf[index:endex]
+	index = endex + 1
+	endex = buf.find(".",index)
+	dOctet2 = buf[index:endex]
+	index = endex + 1
+	endex = buf.find(".",index)
+	dOctet3 = buf[index:endex]
+	index = endex + 1
+	endex = buf.find(".",index)
+	dOctet4 = buf[index:endex]
+	index = endex + 1
+	endex = buf.find(":",index)
+	dPort = buf[index:endex]
+	SourceIP = sOctet1 + "." + sOctet2 + "." + sOctet3 + "." + sOctet4 + "." + sPort
+	DestIP    = dOctet1 + "." + sOctet2 + "." + dOctet3 + "." + dOctet4 + "." + dPort
+	filename = "/Users/doug/Sources/pages/" + SourceIP + "-" + DestIP + ".html"
+	fd3 = open(filename,"a")
+	data = "<p>" + buf
+	fd3.write(data)
+	fd3.close()
+	tag = "<p><a href=" + '"' + filename + '"' + "> " + SourceIP + " -> " + DestIP + "<a>"
+	fd1.write(tag)
+fd2.close()
+fd1.write("</body>")
+fd1.write("</html>")
+fd1.close()
+
+

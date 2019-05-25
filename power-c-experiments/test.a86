@@ -1,0 +1,13 @@
+	CSEG
+	ORG 100H
+	MOV CL,9
+	MOV DX,OFFSET MSG
+	INT 0E0H
+	MOV CL,0
+	INT 0E0H
+	DSEG
+	ORG 100H
+MSG	DB 'Hello World!!','$'
+	rb 256
+	db 0
+	end

@@ -1,0 +1,266 @@
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:47 2010
+
+                                                              Page    1-1
+
+
+                                ; dougdos.asm dwg -  
+                                ; This module contains the higher level functio
+                                ns of 
+                                ; DougDOS. When it needs things done, it calls 
+                                the 
+                                ; dougbios functions. 
+                                 
+                                ;DEBUG	equ	1 
+                                 
+                                	.8086 
+                                 
+                                	ASSUME	cs:cseg 
+                                 
+ 0000                           cseg	SEGMENT	word public 
+                                 
+                                	include dougbios.equ 
+                              I ; dougbios.equ 
+ 0100                         I 	org	100h 
+ 0100                         I cold: 
+ 0104                         I 	org	104h 
+ 0104                         I warm: 
+ 0108                         I 	org	108h 
+ 0108                         I const: 
+ 010C                         I 	org	10ch 
+ 010C                         I conin: 
+ 0110                         I 	org	110h 
+ 0110                         I conout: 
+ 0114                         I 	org	114h 
+ 0114                         I msgout: 
+ 0118                         I 	org	118h 
+ 0118                         I loadngo: 
+ 011C                         I 	org	11ch 
+ 011C                         I term: 
+                              I ; eof - dougbios.equ 
+                                	include	dougdos.equ 
+                              I ; dougdos.equ 
+ = 0100                       I LOADSIZE	equ	100h 
+ = 0300                       I BIOSSIZE	equ	300h 
+ = FBFF                       I DOSSIZE		equ	0FFFFH-BIOSSIZE-LOADSIZE 
+ = 0800                       I TPA		equ	0800h 
+                              I  
+                              I ; 
+ = 0000                       I DOSVER		equ	0 
+ = 0001                       I RUNXEQ		equ	1 
+ = 0002                       I MSGOUT		equ	2 
+                              I  
+                              I  
+                              I ;	org	LOADSIZE+BIOSSIZE+4 
+                              I ;dos_func: 
+                              I  
+                              I ; eof - dougdos.equ 
+                                		 
+ 0400                           	org	LOADSIZE+BIOSSIZE 
+                                	 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:47 2010
+
+                                                              Page    1-2
+
+
+ 0400                           main: 
+ 0400  E9 0005                  	jmp	dos_init 
+ 0403  90                       	nop 
+ 0404  E9 0016                  	jmp	dos_func 
+ 0407  90                       	nop 
+                                	 
+ 0408                           dos_init: 
+ 0408  8C C8                    	mov	ax,cs 
+ 040A  8E D8                    	mov	ds,ax 
+                                	 
+ 040C  BA 044F R                	mov	dx,offset sine 
+ 040F  E8 FD02                  	call	msgout 
+                                 
+                                ;	mov	al,DOSVER 
+                                ;	call	dos_func 
+                                	 
+ 0412  B0 01                    	mov	al,RUNXEQ 
+ 0414  BA 0554 R                	mov	dx,offset xeqfilename 
+ 0417  E8 0003                  	call	dos_func 
+                                	 
+ 041A  E9 FCFF                  	jmp	term 
+                                 
+ 041D                           dos_func: 
+ 041D  8A D8                    	mov	bl,al 
+ 041F  B7 00                    	mov	bh,0 
+ 0421  D1 E3                    	shl	bx,1 
+ 0423  2E: FF A7 0428 R         	jmp	cs:functab[bx] 
+                                 
+ 0428  0438 R                   functab	dw	dos00	; version 
+ 042A  043F R                   	dw	dos01	; loadngo 
+ 042C  0446 R                   	dw	dos02	; mmsgout 
+ 042E  044A R                   	dw	dos03 
+ 0430  044B R                   	dw	dos04 
+ 0432  044C R                   	dw	dos05 
+ 0434  044D R                   	dw	dos06 
+ 0436  044E R                   	dw	dos07 
+                                 
+ 0438                           dos00: 
+                                	; version 
+ 0438  BA 055D R                	mov	dx,offset func00sine 
+ 043B  E8 FCD6                  	call	msgout 
+ 043E  C3                       	ret 
+                                 
+ 043F                           dos01: 
+                                	; loadngo 
+ 043F  E8 FCD6                  	call loadngo 
+ 0442  E8 03BB                  	call tpa 
+ 0445  C3                       	ret 
+                                 
+ 0446                           dos02: 
+ 0446  E8 FCCB                  	call	msgout 
+ 0449  C3                       	ret 
+                                 
+ 044A                           dos03: 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:47 2010
+
+                                                              Page    1-3
+
+
+ 044A  C3                       	ret 
+                                 
+ 044B                           dos04: 
+ 044B  C3                       	ret 
+                                 
+ 044C                           dos05: 
+ 044C  C3                       	ret 
+                                 
+ 044D                           dos06: 
+ 044D  C3                       	ret 
+                                 
+ 044E                           dos07: 
+ 044E  C3                       	ret 
+                                 
+                                	 
+ 044F  2D 2D 2D 2D 2D 2D 2D     sine	db '--------------------------------------
+                                ------------',0dh,0ah 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 0D 0A 
+ 0483  56 69 72 74 75 61 6C     	db 'Virtual Protocol Adapter Doug''s DOS   Ver
+                                sion 1.4a',0dh,0ah 
+       20 50 72 6F 74 6F 63 
+       6F 6C 20 41 64 61 70 
+       74 65 72 20 44 6F 75 
+       67 27 73 20 44 4F 53 
+       20 20 20 56 65 72 73 
+       69 6F 6E 20 31 2E 34 
+       61 0D 0A 
+ 04B7  53 65 72 69 61 6C 20     	db 'Serial No. XXXX-0000-654321    All Rights 
+                                Reserved',0dh,0ah 
+       4E 6F 2E 20 58 58 58 
+       58 2D 30 30 30 30 2D 
+       36 35 34 33 32 31 20 
+       20 20 20 41 6C 6C 20 
+       52 69 67 68 74 73 20 
+       52 65 73 65 72 76 65 
+       64 0D 0A 
+ 04EB  43 6F 70 79 72 69 67     	db 'Copyright (C) 1991-2010 6/4/2010 Douglas W
+                                 Goodall',0dh,0ah 
+       68 74 20 28 43 29 20 
+       31 39 39 31 2D 32 30 
+       31 30 20 36 2F 34 2F 
+       32 30 31 30 20 44 6F 
+       75 67 6C 61 73 20 57 
+       20 47 6F 6F 64 61 6C 
+       6C 0D 0A 
+ 051F  2D 2D 2D 2D 2D 2D 2D     	db '------------------------------------------
+                                --------',0dh,0ah 
+       2D 2D 2D 2D 2D 2D 2D 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:47 2010
+
+                                                              Page    1-4
+
+
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 0D 0A 
+ 0553  24                       	db '$' 
+                                 
+ 0554  61 70 70 6C 2E 78 65     xeqfilename	db	'appl.xeq',0 
+       71 00 
+                                 
+ 055D  64 6F 75 67 64 6F 73     func00sine	db	'dougdos version 1.0.0',0dh,0ah,'
+                                $' 
+       20 76 65 72 73 69 6F 
+       6E 20 31 2E 30 2E 30 
+       0D 0A 24 
+ 0575  66 75 6E 63 30 31 20     func01sine	db	'func01 loadngo running',0dh,0ah,
+                                '$' 
+       6C 6F 61 64 6E 67 6F 
+       20 72 75 6E 6E 69 6E 
+       67 0D 0A 24 
+                                 
+ 0800                           	org	TPA 
+ 0800                           tpa: 
+                                 
+ 0800                           cseg	ENDS 
+                                 
+                                	end 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:47 2010
+
+                                                              Symbols-1
+
+
+	GROUPS AND SEGMENTS
+Name                                Size      Use    Align Combine   Class
+
+cseg . . . . . . . . . . . . . .    00000800  USE16  WORD  PUBLIC    
+
+	VARIABLES AND LABELS
+Name                                Type      Offset    Scope   Segment
+
+cold . . . . . . . . . . . . . .    N LABEL   00000100  Prvate  cseg
+conin  . . . . . . . . . . . . .    N LABEL   0000010C  Prvate  cseg
+conout . . . . . . . . . . . . .    N LABEL   00000110  Prvate  cseg
+const  . . . . . . . . . . . . .    N LABEL   00000108  Prvate  cseg
+dos00  . . . . . . . . . . . . .    N LABEL   00000438  Prvate  cseg
+dos01  . . . . . . . . . . . . .    N LABEL   0000043F  Prvate  cseg
+dos02  . . . . . . . . . . . . .    N LABEL   00000446  Prvate  cseg
+dos03  . . . . . . . . . . . . .    N LABEL   0000044A  Prvate  cseg
+dos04  . . . . . . . . . . . . .    N LABEL   0000044B  Prvate  cseg
+dos05  . . . . . . . . . . . . .    N LABEL   0000044C  Prvate  cseg
+dos06  . . . . . . . . . . . . .    N LABEL   0000044D  Prvate  cseg
+dos07  . . . . . . . . . . . . .    N LABEL   0000044E  Prvate  cseg
+dos_func . . . . . . . . . . . .    N LABEL   0000041D  Prvate  cseg
+dos_init . . . . . . . . . . . .    N LABEL   00000408  Prvate  cseg
+func00sine . . . . . . . . . . .    BYTE      0000055D  Prvate  cseg
+func01sine . . . . . . . . . . .    BYTE      00000575  Prvate  cseg
+functab  . . . . . . . . . . . .    WORD      00000428  Prvate  cseg
+loadngo  . . . . . . . . . . . .    N LABEL   00000118  Prvate  cseg
+main . . . . . . . . . . . . . .    N LABEL   00000400  Prvate  cseg
+msgout . . . . . . . . . . . . .    N LABEL   00000114  Prvate  cseg
+sine . . . . . . . . . . . . . .    BYTE      0000044F  Prvate  cseg
+term . . . . . . . . . . . . . .    N LABEL   0000011C  Prvate  cseg
+tpa  . . . . . . . . . . . . . .    N LABEL   00000800  Prvate  cseg
+warm . . . . . . . . . . . . . .    N LABEL   00000104  Prvate  cseg
+xeqfilename  . . . . . . . . . .    BYTE      00000554  Prvate  cseg
+
+	CONSTANTS
+Name                                Type      Value
+
+BIOSSIZE . . . . . . . . . . . .    Integer   00000300
+DEBUG  . . . . . . . . . . . . .    Text      
+DOSSIZE  . . . . . . . . . . . .    Integer   0000FBFF
+DOSVER . . . . . . . . . . . . .    Integer   00000000
+LOADSIZE . . . . . . . . . . . .    Integer   00000100
+MSGOUT . . . . . . . . . . . . .    Integer   00000002
+RUNXEQ . . . . . . . . . . . . .    Integer   00000001
+STK  . . . . . . . . . . . . . .    Text      64
+TPA  . . . . . . . . . . . . . .    Integer   00000800
+
+
+      35 Symbols
+       0 Warning Errors
+       0 Severe Errors

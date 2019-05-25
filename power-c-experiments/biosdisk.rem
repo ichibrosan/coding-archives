@@ -1,0 +1,15 @@
+/*
+; -------------------------------------------------------
+;    biosdisk(cmd, drive, head, track, sector, nsects, buffer)
+; -------------------------------------------------------
+;        int cmd;       /* action to take 0..5 */
+;        int drive;     /* disk drive number 0.. */
+;        int head;      /* head number */
+;        int track;     /* physical track number */
+;        int sector;    /* starting sector */
+;        int nsects;    /* number of sectors (1..9) */
+;        char *buffer;  /* address of buffer */
+;
+;        return: status word
+; -------------------------------------------------------
+*/

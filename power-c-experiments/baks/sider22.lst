@@ -1,0 +1,428 @@
+
+0000: C3        db  $C3
+
+0001: EF        db  $EF
+0002: F0 F9     beq $FFFFFFFD	; Branch Equals, relative
+
+
+0004: F2        db  $F2
+0005: E9 E7     sbc #$E7	; SuBtract with borrow, immediate
+0007: E8        inx 		; INcrement X by one, implied
+
+0008: F4        db  $F4
+0009: A0 B1     ldy #$B1	; LoaD Y from memory, immediate
+000B: B9 00 B7  lda $B700,x	; LoaD A from memory, absolute indexed
+000E: A0 E6     ldy #$E6	; LoaD Y from memory, immediate
+
+0010: EF        db  $EF
+
+0011: F2        db  $F2
+0012: A0 C1     ldy #$C1	; LoaD Y from memory, immediate
+0014: E4 F6     cpx $F6		; ComPare X with memory, zeropage
+0016: E1 EE     sbc ($00EE),x	; SuBtract with borrow, indirect indexed
+
+0018: E3        db  $E3
+0019: E5 E4     sbc $E4		; SuBtract with borrow, zeropage
+001B: A0 D4     ldy #$D4	; LoaD Y from memory, immediate
+001D: E5 E3     sbc $E3		; SuBtract with borrow, zeropage
+001F: E8        inx 		; INcrement X by one, implied
+0020: A0 D3     ldy #$D3	; LoaD Y from memory, immediate
+0022: E5 F2     sbc $F2		; SuBtract with borrow, zeropage
+0024: F6 E9     inc $E9,x	; INCrement memory by one, zeropage indexed
+
+0026: E3        db  $E3
+0027: E5 F3     sbc $F3		; SuBtract with borrow, zeropage
+0029: 8D 00 F2  sta $F200	; STore A into memory, absolute
+002C: E9 F4     sbc #$F4	; SuBtract with borrow, immediate
+
+002E: F4        db  $F4
+002F: E5 EE     sbc $EE		; SuBtract with borrow, zeropage
+0031: A0 E2     ldy #$E2	; LoaD Y from memory, immediate
+0033: F9 00 CC  sbc $CC00,y	; SuBtract with borrow, absolute indexed
+0036: E1 F2     sbc ($00F2),x	; SuBtract with borrow, indirect indexed
+
+0038: F2        db  $F2
+0039: F9 00 C5  sbc $C500,y	; SuBtract with borrow, absolute indexed
+003C: AE 00 D2  ldx $D200	; LoaD X from memory, absolute
+
+003F: EF        db  $EF
+0040: E4 E4     cpx $E4		; ComPare X with memory, zeropage
+0042: E5 EE     sbc $EE		; SuBtract with borrow, zeropage
+
+0044: E2        db  $E2
+0045: E5 F2     sbc $F2		; SuBtract with borrow, zeropage
+
+0047: F2        db  $F2
+0048: F9 00 A0  sbc $A000,y	; SuBtract with borrow, absolute indexed
+004B: A0 D6     ldy #$D6	; LoaD Y from memory, immediate
+004D: E5 F2     sbc $F2		; SuBtract with borrow, zeropage
+
+004F: F3        db  $F3
+0050: E9 EF     sbc #$EF	; SuBtract with borrow, immediate
+0052: EE 00 B2  inc $B200	; INCrement memory by one, absolute
+0055: AE 00 B2  ldx $B200	; LoaD X from memory, absolute
+0058: A0 A0     ldy #$A0	; LoaD Y from memory, immediate
+
+005A: B2        db  $B2
+
+005B: AF        db  $AF
+005C: B1 B6     lda ($00B6),y	; LoaD A from memory, indirect indexed
+
+005E: AF        db  $AF
+005F: B8        clv 		; CLear oVerflow flag, implied
+
+0060: B7        db  $B7
+0061: 8D 00 00  sta $0000	; STore A into memory, absolute
+0064: D0 42     bne $00A8	; Branch Not Equals, relative
+
+0066: A9 02     lda #$02	; LoaD A from memory, immediate
+0068: 85 46     sta $46		; STore A into memory, zeropage
+006A: 84 47     sty $47		; STore Y into memory, zeropage
+006C: A0 08     ldy #$08	; LoaD Y from memory, immediate
+006E: 20 00 C8  jsr $C800	; Jump to SubRoutine, absolute
+
+0071: B0 30     bcs $00A3	; Branch Carry Set, relative
+
+0073: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0076: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0079: C8        iny 		; INcrement Y by one, implied
+007A: C0 29     cpy #$29	; ComPare Y with memory, immediate
+007C: D0 F5     bne $0073	; Branch Not Equals, relative
+
+007E: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0081: 85 3A     sta $3A		; STore A into memory, zeropage
+0083: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0086: C8        iny 		; INcrement Y by one, implied
+0087: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+008A: 85 3B     sta $3B		; STore A into memory, zeropage
+008C: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+008F: C8        iny 		; INcrement Y by one, implied
+0090: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0093: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0096: C8        iny 		; INcrement Y by one, implied
+0097: D0 F7     bne $0090	; Branch Not Equals, relative
+
+0099: 20 00 C9  jsr $C900	; Jump to SubRoutine, absolute
+
+009C: B0 05     bcs $00A3	; Branch Carry Set, relative
+
+009E: A6 3A     ldx $3A		; LoaD X from memory, zeropage
+00A0: A4 3B     ldy $3B		; LoaD Y from memory, zeropage
+00A2: 60        rts 		; ReTurn from Subroutine, implied
+
+00A3: A2 00     ldx #$00	; LoaD X from memory, immediate
+00A5: A0 00     ldy #$00	; LoaD Y from memory, immediate
+00A7: 60        rts 		; ReTurn from Subroutine, implied
+
+00A8: A5 44     lda $44		; LoaD A from memory, zeropage
+00AA: 85 3A     sta $3A		; STore A into memory, zeropage
+00AC: A5 45     lda $45		; LoaD A from memory, zeropage
+00AE: 85 3B     sta $3B		; STore A into memory, zeropage
+00B0: E6 3B     inc $3B		; INCrement memory by one, zeropage
+00B2: C0 02     cpy #$02	; ComPare Y with memory, immediate
+00B4: F0 18     beq $00CE	; Branch Equals, relative
+
+00B6: A0 08     ldy #$08	; LoaD Y from memory, immediate
+00B8: 20 00 C8  jsr $C800	; Jump to SubRoutine, absolute
+
+00BB: B0 10     bcs $00CD	; Branch Carry Set, relative
+
+00BD: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+00C0: 91 44     sta ($0044),y	; STore A into memory, indirect indexed
+00C2: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+00C5: 91 3A     sta ($003A),y	; STore A into memory, indirect indexed
+00C7: C8        iny 		; INcrement Y by one, implied
+00C8: D0 F3     bne $00BD	; Branch Not Equals, relative
+
+00CA: 4C 00 C9  jmp $C900	; JuMP to new location, absolute
+
+00CD: 60        rts 		; ReTurn from Subroutine, implied
+
+00CE: A0 0A     ldy #$0A	; LoaD Y from memory, immediate
+00D0: 20 00 C8  jsr $C800	; Jump to SubRoutine, absolute
+
+00D3: B0 10     bcs $00E5	; Branch Carry Set, relative
+
+00D5: B1 44     lda ($0044),y	; LoaD A from memory, indirect indexed
+00D7: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+00DA: B1 3A     lda ($003A),y	; LoaD A from memory, indirect indexed
+00DC: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+00DF: C8        iny 		; INcrement Y by one, implied
+00E0: D0 F3     bne $00D5	; Branch Not Equals, relative
+
+00E2: 4C 00 C9  jmp $C900	; JuMP to new location, absolute
+
+00E5: 60        rts 		; ReTurn from Subroutine, implied
+
+00E6: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+00E9: 29 F8     and #$F8	; memory with A, immediate
+00EB: C9 20     cmp #$20	; CoMP A with memory, immediate
+00ED: F0 0A     beq $00F9	; Branch Equals, relative
+
+00EF: A9 20     lda #$20	; LoaD A from memory, immediate
+00F1: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+00F4: A9 00     lda #$00	; LoaD A from memory, immediate
+00F6: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+00F9: A9 01     lda #$01	; LoaD A from memory, immediate
+00FB: 24 43     bit $43		; test BITs in memory with A, zeropage
+00FD: 10 01     bpl $0100	; Branch PLus, relative
+
+00FF: 0A        asl a		; Arithmetic Shift Left one bit, accumulator
+0100: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+0103: A9 80     lda #$80	; LoaD A from memory, immediate
+0105: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+0108: A9 00     lda #$00	; LoaD A from memory, immediate
+010A: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+010D: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0110: 29 08     and #$08	; memory with A, immediate
+0112: F0 43     beq $0157	; Branch Equals, relative
+
+0114: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0117: 10 FB     bpl $0114	; Branch PLus, relative
+
+0119: 98        tya 		; Transfer Y to A, implied
+011A: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+011D: A9 00     lda #$00	; LoaD A from memory, immediate
+011F: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+0122: A5 47     lda $47		; LoaD A from memory, zeropage
+0124: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+0127: A5 46     lda $46		; LoaD A from memory, zeropage
+0129: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+012C: A9 01     lda #$01	; LoaD A from memory, immediate
+012E: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+0131: A9 47     lda #$47	; LoaD A from memory, immediate
+0133: 9D 00 C0  sta $C000,x	; STore A into memory, absolute indexed
+0136: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0139: 10 FB     bpl $0136	; Branch PLus, relative
+
+013B: 29 40     and #$40	; memory with A, immediate
+013D: F0 15     beq $0154	; Branch Equals, relative
+
+013F: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0142: A8        tay 		; Trabsfer A to Y, implied
+0143: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+0146: 10 FB     bpl $0143	; Branch PLus, relative
+
+0148: BD 00 C0  lda $C000,x	; LoaD A from memory, absolute indexed
+014B: 98        tya 		; Transfer Y to A, implied
+014C: 29 02     and #$02	; memory with A, immediate
+014E: F0 04     beq $0154	; Branch Equals, relative
+
+0150: A9 27     lda #$27	; LoaD A from memory, immediate
+0152: 38        sec 		; SEt Carry flag, implied
+0153: 60        rts 		; ReTurn from Subroutine, implied
+
+0154: A8        tay 		; Trabsfer A to Y, implied
+0155: 18        clc 		; CLear Carry flag, implied
+0156: 60        rts 		; ReTurn from Subroutine, implied
+
+0157: A9 2F     lda #$2F	; LoaD A from memory, immediate
+0159: 38        sec 		; SEt Carry flag, implied
+015A: 60        rts 		; ReTurn from Subroutine, implied
+
+015B: 29 07     and #$07	; memory with A, immediate
+015D: 0A        asl a		; Arithmetic Shift Left one bit, accumulator
+015E: 0A        asl a		; Arithmetic Shift Left one bit, accumulator
+015F: 0A        asl a		; Arithmetic Shift Left one bit, accumulator
+0160: 0A        asl a		; Arithmetic Shift Left one bit, accumulator
+0161: 85 43     sta $43		; STore A into memory, zeropage
+0163: A9 01     lda #$01	; LoaD A from memory, immediate
+0165: 85 42     sta $42		; STore A into memory, zeropage
+0167: A9 08     lda #$08	; LoaD A from memory, immediate
+0169: 85 45     sta $45		; STore A into memory, zeropage
+016B: A9 00     lda #$00	; LoaD A from memory, immediate
+016D: 85 44     sta $44		; STore A into memory, zeropage
+016F: 85 46     sta $46		; STore A into memory, zeropage
+0171: 85 47     sta $47		; STore A into memory, zeropage
+0173: A6 43     ldx $43		; LoaD X from memory, zeropage
+0175: A4 42     ldy $42		; LoaD Y from memory, zeropage
+0177: 20 00 C8  jsr $C800	; Jump to SubRoutine, absolute
+
+017A: 90 06     bcc $0182	; Branch Carry Clear, relative
+
+017C: C9 2F     cmp #$2F	; CoMP A with memory, immediate
+017E: F0 12     beq $0192	; Branch Equals, relative
+
+0180: D0 F1     bne $0173	; Branch Not Equals, relative
+
+0182: AE 00 08  ldx $0800	; LoaD X from memory, absolute
+0185: CA        dex 		; DExrement X by one, implied
+0186: D0 0A     bne $0192	; Branch Not Equals, relative
+
+0188: AD 00 08  lda $0800	; LoaD A from memory, absolute
+018B: F0 05     beq $0192	; Branch Equals, relative
+
+018D: A6 43     ldx $43		; LoaD X from memory, zeropage
+018F: 4C 00 08  jmp $0800	; JuMP to new location, absolute
+
+0192: A5 00     lda $00		; LoaD A from memory, zeropage
+0194: D0 0A     bne $01A0	; Branch Not Equals, relative
+
+0196: A5 01     lda $01		; LoaD A from memory, zeropage
+0198: CD 00 07  cmp $0700	; CoMP A with memory, absolute
+019B: D0 03     bne $01A0	; Branch Not Equals, relative
+
+019D: 4C 00 FA  jmp $FA00	; JuMP to new location, absolute
+
+01A0: 20 00 FE  jsr $FE00	; Jump to SubRoutine, absolute
+
+01A3: 20 00 FE  jsr $FE00	; Jump to SubRoutine, absolute
+
+01A6: 20 00 FB  jsr $FB00	; Jump to SubRoutine, absolute
+
+01A9: 20 00 FC  jsr $FC00	; Jump to SubRoutine, absolute
+
+01AC: A0 16     ldy #$16	; LoaD Y from memory, immediate
+01AE: B9 00 C9  lda $C900,x	; LoaD A from memory, absolute indexed
+01B1: 99 00 06  sta $0600,y	; STore A into memory, absolute indexed
+01B4: B9 00 C8  lda $C800,x	; LoaD A from memory, absolute indexed
+01B7: 99 00 07  sta $0700,y	; STore A into memory, absolute indexed
+01BA: 88        dey 		; DEcrement Y by one, implied
+01BB: 10 F1     bpl $01AE	; Branch PLus, relative
+
+01BD: 4C 00 E0  jmp BASIC	; JuMP to new location, absolute
+
+01C0: A0 A0     ldy #$A0	; LoaD Y from memory, immediate
+01C2: C8        iny 		; INcrement Y by one, implied
+01C3: E1 F2     sbc ($00F2),x	; SuBtract with borrow, indirect indexed
+01C5: E4 A0     cpx $A0		; ComPare X with memory, zeropage
+01C7: E4 E9     cpx $E9		; ComPare X with memory, zeropage
+
+01C9: F3        db  $F3
+
+01CA: EB        db  $EB
+01CB: A0 E9     ldy #$E9	; LoaD Y from memory, immediate
+
+01CD: F3        db  $F3
+01CE: A0 EF     ldy #$EF	; LoaD Y from memory, immediate
+01D0: E6 E6     inc $E6		; INCrement memory by one, zeropage
+01D2: EC 00 EE  cpx $EE00	; ComPare X with memory, absolute
+01D5: E5 AE     sbc $AE		; SuBtract with borrow, zeropage
+
+...
+ALL BYTES BETWEEN 0x01D7 and 0x06FF were 0xFF (255).
+...
+
+0700: A2 20     ldx #$20	; LoaD X from memory, immediate
+0702: A2 00     ldx #$00	; LoaD X from memory, immediate
+0704: A2 03     ldx #$03	; LoaD X from memory, immediate
+0706: A2 3C     ldx #$3C	; LoaD X from memory, immediate
+0708: 08        php 		; PusH P register onto stack, implied
+0709: 78        sei 		; SEt Interrupt flag, implied
+070A: 20 00 FF  jsr $FF00	; Jump to SubRoutine, absolute
+
+070D: BA BD     tsx 		; Transfer Stack pointer to X, implied
+070F: 00        brk 		; forced BReaK, implied
+0710: 01 8D     ora ($008D),x	; OR A with memory, indirect indexed
+0712: F8        sed 		; SEt Decimal flag, implied
+
+0713: 07        db  $07
+0714: 28        plp 		; PulL P from stack, implied
+0715: 2C 00 CF  bit $CF00	; test BITs in memory with A, absolute
+0718: 4C 00 C9  jmp $C900	; JuMP to new location, absolute
+
+071B: 18        clc 		; CLear Carry flag, implied
+071C: 90 00     bcc $071E	; Branch Carry Clear, relative
+
+071E: A4 42     ldy $42		; LoaD Y from memory, zeropage
+0720: C0 03     cpy #$03	; ComPare Y with memory, immediate
+0722: F0 14     beq $0738	; Branch Equals, relative
+
+0724: AD 00 CF  lda $CF00	; LoaD A from memory, absolute
+0727: A5 43     lda $43		; LoaD A from memory, zeropage
+0729: 29 70     and #$70	; memory with A, immediate
+072B: AA        tax 		; Transfer A to X, implied
+072C: 4A        lsr a		; Logical Shift Right, accumulator
+072D: 4A        lsr a		; Logical Shift Right, accumulator
+072E: 4A        lsr a		; Logical Shift Right, accumulator
+072F: 4A        lsr a		; Logical Shift Right, accumulator
+0730: 09 C0     ora #$C0	; OR A with memory, immediate
+0732: 8D 00 07  sta $0700	; STore A into memory, absolute
+0735: 4C 00 C8  jmp $C800	; JuMP to new location, absolute
+
+0738: A9 00     lda #$00	; LoaD A from memory, immediate
+073A: 18        clc 		; CLear Carry flag, implied
+073B: 60        rts 		; ReTurn from Subroutine, implied
+
+
+073C: C3        db  $C3
+
+073D: EF        db  $EF
+073E: F0 F9     beq $0739	; Branch Equals, relative
+
+
+0740: F2        db  $F2
+0741: E9 E7     sbc #$E7	; SuBtract with borrow, immediate
+0743: E8        inx 		; INcrement X by one, implied
+
+0744: F4        db  $F4
+0745: A0 B1     ldy #$B1	; LoaD Y from memory, immediate
+0747: B9 00 B7  lda $B700,x	; LoaD A from memory, absolute indexed
+074A: A0 E6     ldy #$E6	; LoaD Y from memory, immediate
+
+074C: EF        db  $EF
+
+074D: F2        db  $F2
+074E: A0 C1     ldy #$C1	; LoaD Y from memory, immediate
+0750: E4 F6     cpx $F6		; ComPare X with memory, zeropage
+0752: E1 EE     sbc ($00EE),x	; SuBtract with borrow, indirect indexed
+
+0754: E3        db  $E3
+0755: E5 E4     sbc $E4		; SuBtract with borrow, zeropage
+0757: A0 D4     ldy #$D4	; LoaD Y from memory, immediate
+0759: E5 E3     sbc $E3		; SuBtract with borrow, zeropage
+075B: E8        inx 		; INcrement X by one, implied
+075C: A0 D3     ldy #$D3	; LoaD Y from memory, immediate
+075E: E5 F2     sbc $F2		; SuBtract with borrow, zeropage
+0760: F6 E9     inc $E9,x	; INCrement memory by one, zeropage indexed
+
+0762: E3        db  $E3
+0763: E5 F3     sbc $F3		; SuBtract with borrow, zeropage
+0765: 8D 00 F2  sta $F200	; STore A into memory, absolute
+0768: E9 F4     sbc #$F4	; SuBtract with borrow, immediate
+
+076A: F4        db  $F4
+076B: E5 EE     sbc $EE		; SuBtract with borrow, zeropage
+076D: A0 E2     ldy #$E2	; LoaD Y from memory, immediate
+076F: F9 00 CC  sbc $CC00,y	; SuBtract with borrow, absolute indexed
+0772: E1 F2     sbc ($00F2),x	; SuBtract with borrow, indirect indexed
+
+0774: F2        db  $F2
+0775: F9 00 C5  sbc $C500,y	; SuBtract with borrow, absolute indexed
+0778: AE 00 D2  ldx $D200	; LoaD X from memory, absolute
+
+077B: EF        db  $EF
+077C: E4 E4     cpx $E4		; ComPare X with memory, zeropage
+077E: E5 EE     sbc $EE		; SuBtract with borrow, zeropage
+
+0780: E2        db  $E2
+0781: E5 F2     sbc $F2		; SuBtract with borrow, zeropage
+
+0783: F2        db  $F2
+0784: F9 00 D6  sbc $D600,y	; SuBtract with borrow, absolute indexed
+0787: E5 F2     sbc $F2		; SuBtract with borrow, zeropage
+
+0789: F3        db  $F3
+078A: E9 EF     sbc #$EF	; SuBtract with borrow, immediate
+078C: EE 00 B2  inc $B200	; INCrement memory by one, absolute
+078F: AE 00 B2  ldx $B200	; LoaD X from memory, absolute
+0792: A0 A0     ldy #$A0	; LoaD Y from memory, immediate
+
+0794: B2        db  $B2
+
+0795: AF        db  $AF
+0796: B1 B6     lda ($00B6),y	; LoaD A from memory, indirect indexed
+
+0798: AF        db  $AF
+0799: B8        clv 		; CLear oVerflow flag, implied
+
+079A: B7        db  $B7
+079B: 8D 00 FF  sta $FF00	; STore A into memory, absolute
+
+...
+ALL BYTES BETWEEN 0x079E and 0x07FA were 0xFF (255).
+...
+
+07FB: FF        db  $FF
+07FC: 00        brk 		; forced BReaK, implied
+07FD: 00        brk 		; forced BReaK, implied

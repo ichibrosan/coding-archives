@@ -1,0 +1,69 @@
+About dis6502.c by DOuglas W. Goodall 2010/01/30 
+
+After using the readprom.c program, a 2716 eprom is transferred 
+to the workstation and stored in a binary file.
+
+The dis6502.c program reads the prom image into a memory buffer,
+and then statically analyzes it using an information structure
+held in a seperate header file called opcodes.h.
+
+The opcodes structure is indexed by operation code between zero
+and two hundred fifty-five. In each record are details about the
+specific instruction such as the numeric opcode, the mnemonic 
+opcode, the instruction length, the addressing mode, and the
+verbose description.
+
+The info structure is indexed by the offset into the eprom of
+the first byte of the instruction. In the case of multi-byte
+instruction, the structure is sparsely filled with unused
+entries for second and third instruction bytes. This structure
+contains all the information yielded by the opcodes structure
+for the specific operation code at that address.
+
+If you want the actual byte from a specific offset in the 
+eprom image, the syntax: (unsigned char)prom[offset] is used.
+
+If you want the information about the operation code at a specific
+offset in the prom image, you may obtain it the long way of the
+short way. During the analysis, information about the operation
+code is copied into the info structure for convenient access.
+
+The long way of getting the mnemonic operztion code for the 
+instruction at offset 0x100 in the prom would be:
+
+(char *) opcodes[prom[0x100]].szMnem
+
+The short way of getting the mnemonic operation code once
+the info structure has been built is:
+
+(char *) info[0x100].szMnem
+
+The dis6502 may be operated in verbose or non-verbose mode
+depending on how terse you want the disassembled listing to be.
+Once you know the mnemonic operation code and addressing modes
+well, you may want to turn off verbose mode by commenting out
+the  #define VERBOSE  statement with  // #define VERBOSE
+
+The size of the prom image is set by a define at the head of the 
+program called PROMSIZE. Intel 2716 eproms are 2048 bytes long.
+
+The provided file, sider22.lst is an example output from the
+dis6502.c program based on the sider22.bin image file.
+
+Three books were used in the creation of this program and it's
+header file.
+
+1. Apple Interfacing by Jonathan S. Titus, David G. Larsen,
+and Christopher A. Titus  isbn: 0-672-21862-3
+
+2. Machine Level Programming on tyhe Apple II/IIe by Graham
+Keeler  isbn: 0-13-541897-6
+
+3. Apple II Assembly Language by Marvin L. De Jong
+isbn: 0-672-21894-1
+
+Have fun, 
+
+Douglas Goodall
+Santa Maria, CA
+

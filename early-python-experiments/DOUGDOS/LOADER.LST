@@ -1,0 +1,390 @@
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:44 2010
+
+                                                              Page    1-1
+
+
+                                ; loader.asm 6/2/2010 dwg -  
+                                ; copyright (c) 2010 douglas goodall. all right
+                                s reserved.  
+                                 
+                                ; This is a DOS program and it uses calls to In
+                                t 21H 
+                                ; to request input/output services. 
+                                 
+                                ; The function of this program is to load subse
+                                quent 
+                                ; binary modules and get them started. 
+                                 
+                                ; first it loads the bios services called dougb
+                                ios.sys 
+                                 
+                                ; second it loads the dos services called dougd
+                                os.sys 
+                                 
+                                ; third it loads an application program called 
+                                appl.xeq 
+                                 
+                                ; fourth it runs the application program (appl.
+                                xeq) 
+                                 
+                                 
+                                	include	dougdos.equ 
+                              I ; dougdos.equ 
+ = 0100                       I LOADSIZE	equ	100h 
+ = 0300                       I BIOSSIZE	equ	300h 
+ = FBFF                       I DOSSIZE		equ	0FFFFH-BIOSSIZE-LOADSIZE 
+ = 0800                       I TPA		equ	0800h 
+                              I  
+                              I ; 
+ = 0000                       I DOSVER		equ	0 
+ = 0001                       I RUNXEQ		equ	1 
+ = 0002                       I MSGOUT		equ	2 
+                              I  
+                              I  
+                              I ;	org	LOADSIZE+BIOSSIZE+4 
+                              I ;dos_func: 
+                              I  
+                              I ; eof - dougdos.equ 
+                                	 
+                                	.8086 
+                                 
+                                	ASSUME	cs:cseg,ds:dseg,ss:sseg 
+                                 
+ 0000                           cseg	SEGMENT	para public 'CODE' 
+                                 
+ 0000  B8 ---- R                start:	mov	ax,seg dseg 
+ 0003  8E D8                    	mov	ds,ax 
+ 0005  B8 ---- R                	mov	ax,seg eseg 
+ 0008  8E C0                    	mov	es,ax 
+ 000A  B8 ---- R                	mov	ax,seg sseg 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:44 2010
+
+                                                              Page    1-2
+
+
+ 000D  8E D0                    	mov	ss,ax 
+                                	ifdef	DEBUG 
+ 000F  90                       	nop 
+                                	endif 
+ 0010  BC 0080 R                	mov	sp,offset stacktop 
+                                 
+ 0013  B4 09                    	mov	ah,9 
+ 0015  BA 0100 R                	mov	dx,offset sine 
+ 0018  CD 21                    	int	21h 
+                                 
+ 001A  B4 3D                    	mov	ah,61		; Open file 
+ 001C  B0 00                    	mov	al,0		; read only 
+ 001E  BA 0205 R                	mov	dx,offset bios_filename 
+ 0021  CD 21                    	int	21h 
+ 0023  73 0B                    	jnc	bios_open_ok 
+ 0025  B4 09                    	mov	ah,9 
+ 0027  BA 0212 R                	mov	dx,offset bios_open_err 
+ 002A  CD 21                    	int	21h 
+ 002C  B4 4C                    	mov	ah,4ch 
+ 002E  CD 21                    	int	21h 
+ 0030                           bios_open_ok: 
+ 0030  A3 0275 R                	mov	bios_file_handle,ax 
+                                 
+ 0033  8B D8                    	mov	bx,ax 
+ 0035  B4 42                    	mov	ah,66		; Move file pointer 
+ 0037  B0 02                    	mov	al,2		; end of file 
+ 0039  B9 0000                  	mov	cx,0 
+ 003C  BA 0000                  	mov	dx,0 
+ 003F  CD 21                    	int	21h 
+ 0041  A3 0277 R                	mov	bios_size_lsw,ax 
+ 0044  89 16 0279 R             	mov	bios_size_msw,dx 
+ 0048  B4 42                    	mov	ah,66		; Move file pointer 
+ 004A  B0 00                    	mov	al,0		; start of file 
+ 004C  8B 1E 0275 R             	mov	bx,bios_file_handle 
+ 0050  B9 0000                  	mov	cx,0 
+ 0053  BA 0100                  	mov	dx,LOADSIZE 
+ 0056  CD 21                    	int	21H 
+                                 
+ 0058  B4 3F                    	mov	ah,63		; Read file		 
+ 005A  8B 1E 0275 R             	mov	bx,bios_file_handle 
+ 005E  8B 0E 0277 R             	mov	cx,bios_size_lsw 
+ 0062  BA 0100 R                	mov	dx,offset bios 
+ 0065  1E                       	push	ds 
+ 0066  0E                       	push	cs 
+ 0067  1F                       	pop	ds 
+ 0068  CD 21                    	int	21h 
+ 006A  1F                       	pop	ds 
+ 006B  73 0B                    	jnc	bios_read_ok 
+ 006D  B4 09                    	mov	ah,9 
+ 006F  BA 0233 R                	mov	dx,offset bios_read_err 
+ 0072  CD 21                    	int	21h 
+ 0074  B4 4C                    	mov	ah,4ch 
+ 0076  CD 21                    	int	21h 
+ 0078                           bios_read_ok: 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:44 2010
+
+                                                              Page    1-3
+
+
+                                	 
+ 0078  B4 3E                    	mov	ah,62		; Close file 
+ 007A  8B 1E 0275 R             	mov	bx,bios_file_handle 
+ 007E  CD 21                    	int	21h 
+ 0080  73 0B                    	jnc	bios_close_ok 
+ 0082  B4 09                    	mov	ah,9 
+ 0084  BA 0254 R                	mov	dx,offset bios_close_err 
+ 0087  CD 21                    	int	21h 
+ 0089  B4 4C                    	mov	ah,4ch 
+ 008B  CD 21                    	int	21h 
+ 008D                           bios_close_ok: 
+                                 
+ 008D  B4 3D                    	mov	ah,61		; Open file 
+ 008F  B0 00                    	mov	al,0		; read only 
+ 0091  BA 027B R                	mov	dx,offset dos_filename 
+ 0094  CD 21                    	int	21h 
+ 0096  73 0B                    	jnc	dos_open_ok 
+ 0098  B4 09                    	mov	ah,9 
+ 009A  BA 0287 R                	mov	dx,offset dos_open_err 
+ 009D  CD 21                    	int	21h 
+ 009F  B4 4C                    	mov	ah,4ch 
+ 00A1  CD 21                    	int	21h 
+ 00A3                           dos_open_ok: 
+ 00A3  A3 02E7 R                	mov	dos_file_handle,ax 
+                                 
+ 00A6  8B D8                    	mov	bx,ax 
+ 00A8  B4 42                    	mov	ah,66		; Move file pointer 
+ 00AA  B0 02                    	mov	al,2		; end of file 
+ 00AC  B9 0000                  	mov	cx,0 
+ 00AF  BA 0000                  	mov	dx,0 
+ 00B2  CD 21                    	int	21h 
+ 00B4  A3 02E9 R                	mov	dos_size_lsw,ax 
+ 00B7  89 16 02EB R             	mov	dos_size_msw,dx 
+ 00BB  B4 42                    	mov	ah,66		; Move file pointer 
+ 00BD  B0 00                    	mov	al,0		; start of file 
+ 00BF  8B 1E 02E7 R             	mov	bx,dos_file_handle 
+ 00C3  B9 0000                  	mov	cx,0 
+ 00C6  BA 0400                  	mov	dx,LOADSIZE+BIOSSIZE 
+ 00C9  CD 21                    	int	21H 
+                                 
+ 00CB  B4 3F                    	mov	ah,63		; Read file		 
+ 00CD  8B 1E 02E7 R             	mov	bx,dos_file_handle 
+ 00D1  8B 0E 02E9 R             	mov	cx,dos_size_lsw 
+ 00D5  BA 0400 R                	mov	dx,offset dos 
+ 00D8  1E                       	push	ds 
+ 00D9  0E                       	push	cs 
+ 00DA  1F                       	pop	ds 
+ 00DB  CD 21                    	int	21h 
+ 00DD  1F                       	pop	ds 
+ 00DE  73 0B                    	jnc	dos_read_ok 
+ 00E0  B4 09                    	mov	ah,9 
+ 00E2  BA 02A7 R                	mov	dx,offset dos_read_err 
+ 00E5  CD 21                    	int	21h 
+ 00E7  B4 4C                    	mov	ah,4ch 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:44 2010
+
+                                                              Page    1-4
+
+
+ 00E9  CD 21                    	int	21h 
+ 00EB                           dos_read_ok: 
+                                	 
+ 00EB  B4 3E                    	mov	ah,62		; Close file 
+ 00ED  8B 1E 0275 R             	mov	bx,bios_file_handle 
+ 00F1  CD 21                    	int	21h 
+ 00F3  73 0B                    	jnc	dos_close_ok 
+ 00F5  B4 09                    	mov	ah,9 
+ 00F7  BA 02C7 R                	mov	dx,offset dos_close_err 
+ 00FA  CD 21                    	int	21h 
+ 00FC  B4 4C                    	mov	ah,4ch 
+ 00FE  CD 21                    	int	21h 
+ 0100                           dos_close_ok: 
+                                 
+                                 
+ 0100                           bios: 
+ 0100  0300[ ?? ]               	db	BIOSSIZE DUP (?) 
+ 0400                           dos: 
+ 0400  FBFF[ ?? ]               	db	DOSSIZE  DUP (?) 
+                                 
+ FFFF                           cseg	ENDS 
+                                 
+ 0000                           dseg	SEGMENT	para public 'DATA' 
+ 0100                           	org	100h 
+                                 
+ 0100  2D 2D 2D 2D 2D 2D 2D     sine	db '--------------------------------------
+                                ------------',0dh,0ah 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 0D 0A 
+ 0134  56 69 72 74 75 61 6C     	db 'Virtual Protocol Adapter DougDOS LDR  Vers
+                                ion 1.4a',0dh,0ah 
+       20 50 72 6F 74 6F 63 
+       6F 6C 20 41 64 61 70 
+       74 65 72 20 44 6F 75 
+       67 44 4F 53 20 4C 44 
+       52 20 20 56 65 72 73 
+       69 6F 6E 20 31 2E 34 
+       61 0D 0A 
+ 0168  53 65 72 69 61 6C 20     	db 'Serial No. XXXX-0000-654321    All Rights 
+                                Reserved',0dh,0ah 
+       4E 6F 2E 20 58 58 58 
+       58 2D 30 30 30 30 2D 
+       36 35 34 33 32 31 20 
+       20 20 20 41 6C 6C 20 
+       52 69 67 68 74 73 20 
+       52 65 73 65 72 76 65 
+       64 0D 0A 
+ 019C  43 6F 70 79 72 69 67     	db 'Copyright (C) 1991-2010 6/4/2010 Douglas W
+                                 Goodall',0dh,0ah 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:44 2010
+
+                                                              Page    1-5
+
+
+       68 74 20 28 43 29 20 
+       31 39 39 31 2D 32 30 
+       31 30 20 36 2F 34 2F 
+       32 30 31 30 20 44 6F 
+       75 67 6C 61 73 20 57 
+       20 47 6F 6F 64 61 6C 
+       6C 0D 0A 
+ 01D0  2D 2D 2D 2D 2D 2D 2D     	db '------------------------------------------
+                                --------',0dh,0ah 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 0D 0A 
+ 0204  24                       	db '$' 
+                                	 
+ 0205  64 6F 75 67 62 69 6F     bios_filename	db	'dougbios.sys',0 
+       73 2E 73 79 73 00 
+ 0212  53 6F 72 72 79 2C 20     bios_open_err	db	'Sorry, error opening bios fil
+                                e',0dh,0H,'$' 
+       65 72 72 6F 72 20 6F 
+       70 65 6E 69 6E 67 20 
+       62 69 6F 73 20 66 69 
+       6C 65 0D 00 24 
+ 0233  53 6F 72 72 79 2C 20     bios_read_err	db	'Sorry, error reading bios fil
+                                e',0dh,0H,'$' 
+       65 72 72 6F 72 20 72 
+       65 61 64 69 6E 67 20 
+       62 69 6F 73 20 66 69 
+       6C 65 0D 00 24 
+ 0254  53 6F 72 72 79 2C 20     bios_close_err	db	'Sorry, error closing bios fi
+                                le',0dh,0H,'$' 
+       65 72 72 6F 72 20 63 
+       6C 6F 73 69 6E 67 20 
+       62 69 6F 73 20 66 69 
+       6C 65 0D 00 24 
+ 0275  0000                     bios_file_handle	dw	0 
+ 0277  0000                     bios_size_lsw		dw	0 
+ 0279  0000                     bios_size_msw		dw	0 
+                                 
+ 027B  64 6F 75 67 64 6F 73     dos_filename	db	'dougdos.sys',0 
+       2E 73 79 73 00 
+ 0287  53 6F 72 72 79 2C 20     dos_open_err	db	'Sorry, error opening dos file'
+                                ,0dh,0H,'$' 
+       65 72 72 6F 72 20 6F 
+       70 65 6E 69 6E 67 20 
+       64 6F 73 20 66 69 6C 
+       65 0D 00 24 
+ 02A7  53 6F 72 72 79 2C 20     dos_read_err	db	'Sorry, error reading dos file'
+                                ,0dh,0H,'$' 
+       65 72 72 6F 72 20 72 
+       65 61 64 69 6E 67 20 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:44 2010
+
+                                                              Page    1-6
+
+
+       64 6F 73 20 66 69 6C 
+       65 0D 00 24 
+ 02C7  53 6F 72 72 79 2C 20     dos_close_err	db	'Sorry, error closing dos file
+                                ',0dh,0H,'$' 
+       65 72 72 6F 72 20 63 
+       6C 6F 73 69 6E 67 20 
+       64 6F 73 20 66 69 6C 
+       65 0D 00 24 
+ 02E7  0000                     dos_file_handle	dw	0 
+ 02E9  0000                     dos_size_lsw	dw	0 
+ 02EB  0000                     dos_size_msw	dw	0 
+                                 
+ 02ED                           dseg	ENDS 
+                                 
+ 0000                           eseg	SEGMENT	word public 
+ 0000  00 01 02 03 04 05 06     	db 	0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 
+       07 08 09 0A 0B 0C 0D 
+       0E 0F 
+ 0010                           eseg	ENDS 
+                                 
+ 0000                           sseg	SEGMENT	para stack 'STACK' 
+ 0000  0040[ ???? ]             	dw	STK DUP (?) 
+ 0080                           stacktop: 
+ 0080                           sseg	ENDS 
+                                 
+                                	end 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:44 2010
+
+                                                              Symbols-1
+
+
+	GROUPS AND SEGMENTS
+Name                                Size      Use    Align Combine   Class
+
+cseg . . . . . . . . . . . . . .    0000FFFF  USE16  PARA  PUBLIC    CODE
+dseg . . . . . . . . . . . . . .    000002ED  USE16  PARA  PUBLIC    DATA
+eseg . . . . . . . . . . . . . .    00000010  USE16  WORD  PUBLIC    
+sseg . . . . . . . . . . . . . .    00000080  USE16  PARA  STACK     STACK
+
+	VARIABLES AND LABELS
+Name                                Type      Offset    Scope   Segment
+
+bios . . . . . . . . . . . . . .    N LABEL   00000100  Prvate  cseg
+bios_close_err . . . . . . . . .    BYTE      00000254  Prvate  dseg
+bios_close_ok  . . . . . . . . .    N LABEL   0000008D  Prvate  cseg
+bios_file_handle . . . . . . . .    WORD      00000275  Prvate  dseg
+bios_filename  . . . . . . . . .    BYTE      00000205  Prvate  dseg
+bios_open_err  . . . . . . . . .    BYTE      00000212  Prvate  dseg
+bios_open_ok . . . . . . . . . .    N LABEL   00000030  Prvate  cseg
+bios_read_err  . . . . . . . . .    BYTE      00000233  Prvate  dseg
+bios_read_ok . . . . . . . . . .    N LABEL   00000078  Prvate  cseg
+bios_size_lsw  . . . . . . . . .    WORD      00000277  Prvate  dseg
+bios_size_msw  . . . . . . . . .    WORD      00000279  Prvate  dseg
+dos  . . . . . . . . . . . . . .    N LABEL   00000400  Prvate  cseg
+dos_close_err  . . . . . . . . .    BYTE      000002C7  Prvate  dseg
+dos_close_ok . . . . . . . . . .    N LABEL   00000100  Prvate  cseg
+dos_file_handle  . . . . . . . .    WORD      000002E7  Prvate  dseg
+dos_filename . . . . . . . . . .    BYTE      0000027B  Prvate  dseg
+dos_open_err . . . . . . . . . .    BYTE      00000287  Prvate  dseg
+dos_open_ok  . . . . . . . . . .    N LABEL   000000A3  Prvate  cseg
+dos_read_err . . . . . . . . . .    BYTE      000002A7  Prvate  dseg
+dos_read_ok  . . . . . . . . . .    N LABEL   000000EB  Prvate  cseg
+dos_size_lsw . . . . . . . . . .    WORD      000002E9  Prvate  dseg
+dos_size_msw . . . . . . . . . .    WORD      000002EB  Prvate  dseg
+sine . . . . . . . . . . . . . .    BYTE      00000100  Prvate  dseg
+stacktop . . . . . . . . . . . .    N LABEL   00000080  Prvate  sseg
+start  . . . . . . . . . . . . .    N LABEL   00000000  Prvate  cseg
+
+	CONSTANTS
+Name                                Type      Value
+
+BIOSSIZE . . . . . . . . . . . .    Integer   00000300
+DEBUG  . . . . . . . . . . . . .    Text      
+DOSSIZE  . . . . . . . . . . . .    Integer   0000FBFF
+DOSVER . . . . . . . . . . . . .    Integer   00000000
+LOADSIZE . . . . . . . . . . . .    Integer   00000100
+MSGOUT . . . . . . . . . . . . .    Integer   00000002
+RUNXEQ . . . . . . . . . . . . .    Integer   00000001
+STK  . . . . . . . . . . . . . .    Text      64
+TPA  . . . . . . . . . . . . . .    Integer   00000800
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:44 2010
+
+                                                              Symbols-2
+
+
+
+
+      38 Symbols
+       0 Warning Errors
+       0 Severe Errors

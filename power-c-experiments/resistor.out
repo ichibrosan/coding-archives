@@ -1,0 +1,32 @@
+
+./resistors Copyright(C) 2010 Douglas W. Goodall. All Rights Reserved.
+
+starting phase 1
+Solution found for target[01] (0100000.000) == value[28] (0100000.000)
+Solution found for target[10] (0002000.000) == value[29] (0002000.000)
+Solution found for target[12] (0000020.000) == value[35] (0000020.000)
+phase 1 complete
+
+starting phase 2
+Solution found for target[08] (0200000.000) == 0100000.000 + 0100000.000
+Solution found for target[24] (0004000.000) == 0002000.000 + 0002000.000
+Solution found for target[26] (0000040.000) == 0000020.000 + 0000020.000
+phase 2 complete
+
+starting phase 3
+Solution found for target[02] (0010000.000) == 0000160.000 + 0000750.000 + 0009090.000
+Solution found for target[03] (0001000.000) == 0000221.000 + 0000649.000 + 0000130.000
+Solution found for target[09] (0020000.000) == 0001820.000 + 0009090.000 + 0009090.000
+Solution found for target[11] (0000200.000) == 0000160.000 + 0000020.000 + 0000020.000
+Solution found for target[15] (0300000.000) == 0100000.000 + 0100000.000 + 0100000.000
+Solution found for target[16] (0030000.000) == 0006190.000 + 0022600.000 + 0001210.000
+phase 3 complete
+
+starting phase 4
+Solution found for target[17] (0003000.000) == 0000221.000 + 0002000.000 + 0000649.000 + 0000130.000
+Solution found for target[18] (0000300.000) == 0000020.000 + 0000020.000 + 0000130.000 + 0000130.000
+Solution found for target[22] (0400000.000) == 0100000.000 + 0100000.000 + 0100000.000 + 0100000.000
+Solution found for target[23] (0040000.000) == 0006190.000 + 0001820.000 + 0027000.000 + 0004990.000
+Solution found for target[25] (0000400.000) == 0000033.000 + 0000033.000 + 0000174.000 + 0000160.000
+phase 4 complete
+

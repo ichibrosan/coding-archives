@@ -1,0 +1,25 @@
+LinkLoc: 4.0 -- Copyright (C) 1986-91 Phar Lap Software, Inc.
+Target CPU is 8086/88
+
+
+Command line switches:
+
+-8086 -locmap dougbios.obj -binary dougbios.bin 0
+
+Warning: No stack segment.
+
+Input module(s):
+
+"dougbi" from file "dougbios.obj".
+
+
+Segment map
+
+     Name         Group         Class     Type  Frame:off  Size
+------------  ------------  ------------  ----  ---------  ----
+cseg                                      PUB   0000:0000  0400
+
+
+Local symbols
+
+Module "dougbi" from file "dougbios.obj"  Code segment = 0000

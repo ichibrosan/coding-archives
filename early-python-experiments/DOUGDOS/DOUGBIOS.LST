@@ -1,0 +1,337 @@
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:46 2010
+
+dougbios                                                      Page    1-1
+
+
+                                	title	dougbios  
+                                	subttl	copyright (c) douglas goodall 
+                                	 
+                                ;DEBUG	equ	1 
+                                 
+                                	.8086 
+                                 
+                                	include dougdos.equ 
+                              I ; dougdos.equ 
+ = 0100                       I LOADSIZE	equ	100h 
+ = 0300                       I BIOSSIZE	equ	300h 
+ = FBFF                       I DOSSIZE		equ	0FFFFH-BIOSSIZE-LOADSIZE 
+ = 0800                       I TPA		equ	0800h 
+                              I  
+                              I ; 
+ = 0000                       I DOSVER		equ	0 
+ = 0001                       I RUNXEQ		equ	1 
+ = 0002                       I MSGOUT		equ	2 
+                              I  
+                              I  
+                              I ;	org	LOADSIZE+BIOSSIZE+4 
+                              I ;dos_func: 
+                              I  
+                              I ; eof - dougdos.equ 
+                                	 
+                                	ASSUME	cs:cseg,ds:cseg,ss:cseg 
+ 0000                           cseg	SEGMENT	word public 
+                                 
+ 0100                           	org	LOADSIZE 
+                                 
+ 0100  E9 001D                  	jmp	coldstart 
+ 0103  90                       	nop 
+ 0104  E9 005A                  	jmp	warmstart 
+ 0107  90                       	nop 
+ 0108  E9 0060                  	jmp	const 
+ 010B  90                       	nop 
+ 010C  E9 005F                  	jmp	conin 
+ 010F  90                       	nop 
+ 0110  E9 005E                  	jmp	conout 
+ 0113  90                       	nop 
+ 0114  E9 0063                  	jmp	msgout 
+ 0117  90                       	nop 
+ 0118  E9 0064                  	jmp	loadngo 
+ 011B  90                       	nop 
+ 011C  E9 00C4                  	jmp	term 
+ 011F  90                       	nop 
+                                					 
+ 0120                           coldstart: 
+ 0120  2E: A3 025F R            	mov	cs:entryax,ax 
+ 0124  2E: 89 1E 0261 R         	mov	cs:entrybx,bx 
+ 0129  2E: 89 0E 0263 R         	mov	cs:entrycx,cx 
+ 012E  2E: 89 16 0265 R         	mov	cs:entrydx,dx 
+ 0133  2E: 89 2E 0267 R         	mov	cs:entrybp,bp 
+ 0138  2E: 89 36 0269 R         	mov	cs:entrysi,si 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:46 2010
+
+dougbios                                                      Page    1-2
+copyright (c) douglas goodall
+
+ 013D  2E: 89 3E 026B R         	mov	cs:entrydi,di 
+ 0142  2E: 8C 1E 026D R         	mov	cs:entryds,ds 
+ 0147  2E: 8C 06 026F R         	mov	cs:entryes,es 
+ 014C  2E: 8C 16 0271 R         	mov	cs:entryss,ss 
+ 0151  2E: 89 26 0273 R         	mov	cs:entrysp,sp 
+                                	 
+ 0156  8C C8                    	mov	ax,cs 
+ 0158  8E D8                    	mov	ds,ax 
+ 015A  8E D0                    	mov	ss,ax 
+ 015C  8E C0                    	mov	es,ax 
+ 015E  BC 03BA R                	mov	sp,offset stktop 
+                                 
+ 0161                           warmstart:	 
+ 0161  B4 09                    	mov	ah,9 
+ 0163  BA 0275 R                	mov	dx,offset sine 
+ 0166  CD 21                    	int	21h 
+ 0168  E9 0295                  	jmp	dos 
+                                		 
+                                 
+ 016B                           const: 
+ 016B  B0 00                    	mov	al,0 
+ 016D  C3                       	ret 
+                                	 
+ 016E                           conin: 
+ 016E  B0 00                    	mov	al,0 
+ 0170  C3                       	ret 
+                                	 
+ 0171                           conout: 
+ 0171  B4 0E                    	mov	ah,14 
+ 0173  B7 00                    	mov	bh,0 
+ 0175  B3 00                    	mov	bl,0 
+ 0177  CD 10                    	int	10h 
+ 0179  C3                       	ret 
+                                 
+ 017A                           msgout: 
+ 017A  B4 09                    	mov	ah,9 
+ 017C  CD 21                    	int	21h 
+ 017E  C3                       	ret 
+                                 
+                                ; dx ==> filename of xeq file 
+ 017F                           loadngo: 
+ 017F  B4 3D                    	mov	ah,61		; Open file 
+ 0181  B0 00                    	mov	al,0		; read only 
+ 0183  CD 21                    	int	21h 
+ 0185  73 0B                    	jnc	load_open_ok 
+ 0187  B4 09                    	mov	ah,9 
+ 0189  BA 01E9 R                	mov	dx,offset prog_open_err 
+ 018C  CD 21                    	int	21h 
+ 018E  B4 4C                    	mov	ah,4ch 
+ 0190  CD 21                    	int	21h 
+ 0192                           load_open_ok: 
+ 0192  A3 01E7 R                	mov	load_file_handle,ax 
+ 0195  B4 42                    	mov	ah,66		; Move file pointer 
+ 0197  B0 00                    	mov	al,0		; start of file 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:46 2010
+
+dougbios                                                      Page    1-3
+copyright (c) douglas goodall
+
+ 0199  8B 1E 01E7 R             	mov	bx,load_file_handle 
+ 019D  B9 0000                  	mov	cx,0 
+ 01A0  BA 0800                  	mov	dx,TPA 
+ 01A3  CD 21                    	int	21H 
+ 01A5  73 0B                    	jnc	load_ptr_ok 
+ 01A7  B4 09                    	mov	ah,9 
+ 01A9  BA 0206 R                	mov	dx,offset prog_ptr_err 
+ 01AC  CD 21                    	int	21h 
+ 01AE  B4 4C                    	mov	ah,4ch 
+ 01B0  CD 21                    	int	21h 
+ 01B2                           load_ptr_ok: 
+ 01B2  B4 3F                    	mov	ah,63		; Read file		 
+ 01B4  8B 1E 01E7 R             	mov	bx,load_file_handle 
+ 01B8  B9 090E                  	mov	cx,2318 
+ 01BB  BA 0800                  	mov	dx,TPA 
+ 01BE  1E                       	push	ds 
+ 01BF  0E                       	push	cs 
+ 01C0  1F                       	pop	ds 
+ 01C1  CD 21                    	int	21h 
+ 01C3  1F                       	pop	ds 
+ 01C4  73 0B                    	jnc	prog_read_ok 
+ 01C6  B4 09                    	mov	ah,9 
+ 01C8  BA 0224 R                	mov	dx,offset prog_read_err 
+ 01CB  CD 21                    	int	21h 
+ 01CD  B4 4C                    	mov	ah,4ch 
+ 01CF  CD 21                    	int	21h 
+ 01D1                           prog_read_ok: 
+ 01D1  B4 3E                    	mov	ah,62		; Close file 
+ 01D3  8B 1E 01E7 R             	mov	bx,load_file_handle 
+ 01D7  CD 21                    	int	21h 
+ 01D9  73 07                    	jnc	prog_close_ok 
+ 01DB  B4 09                    	mov	ah,9 
+ 01DD  BA 0241 R                	mov	dx,offset prog_close_err 
+ 01E0  CD 21                    	int	21h 
+ 01E2                           prog_close_ok: 
+ 01E2  C3                       	ret 
+                                	 
+                                 
+ 01E3                           term: 
+ 01E3  B4 4C                    	mov	ah,4ch 
+ 01E5  CD 21                    	int	21h 
+                                 
+ 01E7  0000                     load_file_handle	dw	0 
+                                 
+ 01E9  53 6F 72 72 79 2C 20     prog_open_err	db	'Sorry, program open failed',0
+                                dh,0ah,'$' 
+       70 72 6F 67 72 61 6D 
+       20 6F 70 65 6E 20 66 
+       61 69 6C 65 64 0D 0A 
+       24 
+ 0206  53 6F 72 72 79 2C 20     prog_ptr_err    db      'Sorry, program  ptr  f
+                                ailed',0dh,0ah,'$' 
+       70 72 6F 67 72 61 6D 
+       20 20 70 74 72 20 20 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:46 2010
+
+dougbios                                                      Page    1-4
+copyright (c) douglas goodall
+
+       66 61 69 6C 65 64 0D 
+       0A 24 
+ 0224  53 6F 72 72 79 2C 20     prog_read_err	db	'Sorry, program read failed',0
+                                dh,0ah,'$' 
+       70 72 6F 67 72 61 6D 
+       20 72 65 61 64 20 66 
+       61 69 6C 65 64 0D 0A 
+       24 
+ 0241  53 6F 72 72 79 2C 20     prog_close_err	db	'Sorry, program close failed'
+                                ,0dh,0ah,'$' 
+       70 72 6F 67 72 61 6D 
+       20 63 6C 6F 73 65 20 
+       66 61 69 6C 65 64 0D 
+       0A 24 
+                                			 
+ 025F  0000                     entryax	dw	0 
+ 0261  0000                     entrybx	dw	0 
+ 0263  0000                     entrycx	dw	0 
+ 0265  0000                     entrydx	dw	0 
+ 0267  0000                     entrybp	dw	0 
+ 0269  0000                     entrysi	dw	0 
+ 026B  0000                     entrydi	dw	0	 
+ 026D  0000                     entryds	dw	0 
+ 026F  0000                     entryes	dw	0 
+ 0271  0000                     entryss	dw	0 
+ 0273  0000                     entrysp	dw	0 
+                                 
+ 0275  2D 2D 2D 2D 2D 2D 2D     sine	db '--------------------------------------
+                                ------------',0dh,0ah 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 0D 0A 
+ 02A9  56 69 72 74 75 61 6C     	db 'Virtual Protocol Adapter Doug''s BIOS  Ver
+                                sion 1.4a',0dh,0ah 
+       20 50 72 6F 74 6F 63 
+       6F 6C 20 41 64 61 70 
+       74 65 72 20 44 6F 75 
+       67 27 73 20 42 49 4F 
+       53 20 20 56 65 72 73 
+       69 6F 6E 20 31 2E 34 
+       61 0D 0A 
+ 02DD  53 65 72 69 61 6C 20     	db 'Serial No. XXXX-0000-654321    All Rights 
+                                Reserved',0dh,0ah 
+       4E 6F 2E 20 58 58 58 
+       58 2D 30 30 30 30 2D 
+       36 35 34 33 32 31 20 
+       20 20 20 41 6C 6C 20 
+       52 69 67 68 74 73 20 
+       52 65 73 65 72 76 65 
+       64 0D 0A 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:46 2010
+
+dougbios                                                      Page    1-5
+copyright (c) douglas goodall
+
+ 0311  43 6F 70 79 72 69 67     	db 'Copyright (C) 1991-2010 6/4/2010 Douglas W
+                                 Goodall',0dh,0ah 
+       68 74 20 28 43 29 20 
+       31 39 39 31 2D 32 30 
+       31 30 20 36 2F 34 2F 
+       32 30 31 30 20 44 6F 
+       75 67 6C 61 73 20 57 
+       20 47 6F 6F 64 61 6C 
+       6C 0D 0A 
+ 0345  2D 2D 2D 2D 2D 2D 2D     	db '------------------------------------------
+                                --------',0dh,0ah 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 2D 2D 2D 2D 2D 2D 
+       2D 0D 0A 
+ 0379  24                       	db '$' 
+                                 
+ 037A  0020[ ???? ]             	dw	32 DUP (?) 
+ 03BA  0000                     stktop	dw	0 
+                                 
+ 0400                           	org	LOADSIZE+BIOSSIZE 
+ 0400                           dos: 
+                                 
+ 0400                           cseg	ENDS 
+                                 
+                                	end 
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:46 2010
+
+dougbios                                                      Symbols-1
+copyright (c) douglas goodall
+
+	GROUPS AND SEGMENTS
+Name                                Size      Use    Align Combine   Class
+
+cseg . . . . . . . . . . . . . .    00000400  USE16  WORD  PUBLIC    
+
+	VARIABLES AND LABELS
+Name                                Type      Offset    Scope   Segment
+
+coldstart  . . . . . . . . . . .    N LABEL   00000120  Prvate  cseg
+conin  . . . . . . . . . . . . .    N LABEL   0000016E  Prvate  cseg
+conout . . . . . . . . . . . . .    N LABEL   00000171  Prvate  cseg
+const  . . . . . . . . . . . . .    N LABEL   0000016B  Prvate  cseg
+dos  . . . . . . . . . . . . . .    N LABEL   00000400  Prvate  cseg
+entryax  . . . . . . . . . . . .    WORD      0000025F  Prvate  cseg
+entrybp  . . . . . . . . . . . .    WORD      00000267  Prvate  cseg
+entrybx  . . . . . . . . . . . .    WORD      00000261  Prvate  cseg
+entrycx  . . . . . . . . . . . .    WORD      00000263  Prvate  cseg
+entrydi  . . . . . . . . . . . .    WORD      0000026B  Prvate  cseg
+entryds  . . . . . . . . . . . .    WORD      0000026D  Prvate  cseg
+entrydx  . . . . . . . . . . . .    WORD      00000265  Prvate  cseg
+entryes  . . . . . . . . . . . .    WORD      0000026F  Prvate  cseg
+entrysi  . . . . . . . . . . . .    WORD      00000269  Prvate  cseg
+entrysp  . . . . . . . . . . . .    WORD      00000273  Prvate  cseg
+entryss  . . . . . . . . . . . .    WORD      00000271  Prvate  cseg
+load_file_handle . . . . . . . .    WORD      000001E7  Prvate  cseg
+load_open_ok . . . . . . . . . .    N LABEL   00000192  Prvate  cseg
+load_ptr_ok  . . . . . . . . . .    N LABEL   000001B2  Prvate  cseg
+loadngo  . . . . . . . . . . . .    N LABEL   0000017F  Prvate  cseg
+msgout . . . . . . . . . . . . .    N LABEL   0000017A  Prvate  cseg
+prog_close_err . . . . . . . . .    BYTE      00000241  Prvate  cseg
+prog_close_ok  . . . . . . . . .    N LABEL   000001E2  Prvate  cseg
+prog_open_err  . . . . . . . . .    BYTE      000001E9  Prvate  cseg
+prog_ptr_err . . . . . . . . . .    BYTE      00000206  Prvate  cseg
+prog_read_err  . . . . . . . . .    BYTE      00000224  Prvate  cseg
+prog_read_ok . . . . . . . . . .    N LABEL   000001D1  Prvate  cseg
+sine . . . . . . . . . . . . . .    BYTE      00000275  Prvate  cseg
+stktop . . . . . . . . . . . . .    WORD      000003BA  Prvate  cseg
+term . . . . . . . . . . . . . .    N LABEL   000001E3  Prvate  cseg
+warmstart  . . . . . . . . . . .    N LABEL   00000161  Prvate  cseg
+
+	CONSTANTS
+Name                                Type      Value
+
+BIOSSIZE . . . . . . . . . . . .    Integer   00000300
+DEBUG  . . . . . . . . . . . . .    Text      
+DOSSIZE  . . . . . . . . . . . .    Integer   0000FBFF
+DOSVER . . . . . . . . . . . . .    Integer   00000000
+LOADSIZE . . . . . . . . . . . .    Integer   00000100
+MSGOUT . . . . . . . . . . . . .    Integer   00000002
+RUNXEQ . . . . . . . . . . . . .    Integer   00000001
+STK  . . . . . . . . . . . . . .    Text      64
+TPA  . . . . . . . . . . . . . .    Integer   00000800
+Phar Lap Macro Assembler  Version 4.0           Fri Jun  4 08:57:46 2010
+
+dougbios                                                      Symbols-2
+copyright (c) douglas goodall
+
+
+
+      41 Symbols
+       0 Warning Errors
+       0 Severe Errors
